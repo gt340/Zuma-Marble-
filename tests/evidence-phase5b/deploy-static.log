@@ -1,0 +1,31 @@
+PASS  vercel.json: exactly one rewrite "/" -> "/zuma3d-android.html", no redirects
+PASS  deploy dir has no index.html (so "/" depends on the rewrite)
+PASS  vendor/three.module.js present in the export and is the tested r160 file  — 76dea8151bc9352a
+PASS  GET / -> 200 (rewrite, not a redirect), same bytes as the game page  — status 200, 22040 bytes
+PASS  GET /zuma3d-android.html -> 200 directly (no redirect loop)
+PASS  every asset referenced by the page, plus the modules, SW, manifest, icons and Three.js, returns 200 from the root path  — 13 files
+PASS  manifest start_url and icons resolve
+PASS  Three.js is served as JavaScript (module MIME type)  — text/javascript; charset=utf-8
+PASS  unknown path -> 404 (no catch-all rewrite masking missing files)
+PASS  root URL: page loaded with no redirect, final path /
+PASS  root URL: the committed Three.js r160 module is the one in use (real WebGLRenderer, same module instance)  — {"rev":"160","real":true,"canvases":1}
+PASS  root URL: Three.js requested from /vendor/, no request to unpkg or any other origin  — zero off-origin attempts
+PASS  root URL: error screen not shown, no console errors, no failed requests  — clean
+PASS  root URL: diagnostics disabled by default
+PASS  root URL: campaign level 1 starts and keeps rendering (frames advance, state playing, marble symbols on by default; no input/shot is simulated here — shooting is covered by the browser suites)  — {"f":147,"calls":63,"st":"playing","shots":-1,"marks":true,"cw":390,"sw":390,"so":390}
+PASS  root URL: mobile layout — canvas fills the 390 px viewport, no horizontal scroll  — canvas 390, viewport 390, scrollWidth 390
+PASS  root URL: still no errors / off-origin requests after gameplay  — clean
+PASS  service worker registers with scope "/" from the root URL  — {"scope":"/","active":true}
+PASS  service worker precached Three.js and the game files (offline start possible without the CDN)  — {"v":"zuma3d-v2.0.5","three":true,"main":true}
+PASS  offline reload of "/" boots from the service-worker cache  — true
+PASS  game URL: page loaded with no redirect, final path /zuma3d-android.html
+PASS  game URL: the committed Three.js r160 module is the one in use (real WebGLRenderer, same module instance)  — {"rev":"160","real":true,"canvases":1}
+PASS  game URL: Three.js requested from /vendor/, no request to unpkg or any other origin  — zero off-origin attempts
+PASS  game URL: error screen not shown, no console errors, no failed requests  — clean
+PASS  game URL: diagnostics disabled by default
+PASS  game URL: landscape layout fits, no horizontal scroll  — {"cw":844,"sw":844,"so":844}
+PASS  negative control: with vendor/three.module.js removed the CDN is attempted (blocked here) and the game cannot start — the test would catch a missing vendor file  — {"cdnAttempt":true,"err":true,"ready":false}
+PASS  no redirect responses were issued at all
+
+28/28 deploy checks passed
+exit 0

@@ -1,0 +1,113 @@
+
+=== 360x640  marbles measured 45 (types 0,1,2,3,4,5), marble diameter 16.3 css px, crop 13x13 px; draw calls on/off 60/53, triangles on/off 37024/36926 ===
+normal min per-marble max|dL*| (marks on vs off) = 53.5  [per type min: plus 74, triangle 82, bars 54, cross 86, dot 63, ring 63]  | luminance-only type identification: 100% (n=45)  control marks OFF: 16%
+protan min per-marble max|dL*| (marks on vs off) = 55.6  [per type min: plus 74, triangle 83, bars 56, cross 85, dot 61, ring 57]  | luminance-only type identification: 100% (n=45)  control marks OFF: 20%
+deutan min per-marble max|dL*| (marks on vs off) = 52.2  [per type min: plus 75, triangle 81, bars 52, cross 87, dot 65, ring 65]  | luminance-only type identification: 100% (n=45)  control marks OFF: 16%
+tritan min per-marble max|dL*| (marks on vs off) = 54.3  [per type min: plus 74, triangle 81, bars 54, cross 85, dot 64, ring 59]  | luminance-only type identification: 100% (n=45)  control marks OFF: 20%
+
+=== 390x844  marbles measured 43 (types 0,1,2,3,4,5), marble diameter 17.6 css px, crop 13x13 px; draw calls on/off 62/55, triangles on/off 37048/36950 ===
+normal min per-marble max|dL*| (marks on vs off) = 54.0  [per type min: plus 76, triangle 83, bars 54, cross 87, dot 71, ring 63]  | luminance-only type identification: 100% (n=43)  control marks OFF: 26%
+protan min per-marble max|dL*| (marks on vs off) = 56.2  [per type min: plus 73, triangle 84, bars 56, cross 86, dot 69, ring 57]  | luminance-only type identification: 100% (n=43)  control marks OFF: 30%
+deutan min per-marble max|dL*| (marks on vs off) = 52.7  [per type min: plus 78, triangle 82, bars 53, cross 88, dot 73, ring 66]  | luminance-only type identification: 100% (n=43)  control marks OFF: 23%
+tritan min per-marble max|dL*| (marks on vs off) = 55.2  [per type min: plus 74, triangle 83, bars 55, cross 86, dot 72, ring 58]  | luminance-only type identification: 100% (n=43)  control marks OFF: 26%
+
+=== 412x915  marbles measured 43 (types 0,1,2,3,4,5), marble diameter 18.8 css px, crop 15x15 px; draw calls on/off 63/56, triangles on/off 37048/36952 ===
+normal min per-marble max|dL*| (marks on vs off) = 53.8  [per type min: plus 83, triangle 84, bars 54, cross 86, dot 73, ring 63]  | luminance-only type identification: 100% (n=43)  control marks OFF: 19%
+protan min per-marble max|dL*| (marks on vs off) = 56.3  [per type min: plus 80, triangle 85, bars 56, cross 85, dot 72, ring 57]  | luminance-only type identification: 100% (n=43)  control marks OFF: 35%
+deutan min per-marble max|dL*| (marks on vs off) = 52.2  [per type min: plus 84, triangle 83, bars 52, cross 87, dot 73, ring 66]  | luminance-only type identification: 100% (n=43)  control marks OFF: 26%
+tritan min per-marble max|dL*| (marks on vs off) = 55.3  [per type min: plus 81, triangle 84, bars 55, cross 85, dot 72, ring 59]  | luminance-only type identification: 100% (n=43)  control marks OFF: 23%
+
+=== 640x360  marbles measured 43 (types 0,1,2,3,4,5), marble diameter 12.7 css px, crop 9x9 px; draw calls on/off 67/60, triangles on/off 37164/37066 ===
+normal min per-marble max|dL*| (marks on vs off) = 45.9  [per type min: plus 55, triangle 78, bars 46, cross 84, dot 66, ring 60]  | luminance-only type identification: 100% (n=43)  control marks OFF: 28%
+protan min per-marble max|dL*| (marks on vs off) = 45.8  [per type min: plus 46, triangle 79, bars 48, cross 83, dot 63, ring 54]  | luminance-only type identification: 100% (n=43)  control marks OFF: 19%
+deutan min per-marble max|dL*| (marks on vs off) = 44.6  [per type min: plus 60, triangle 76, bars 45, cross 85, dot 68, ring 63]  | luminance-only type identification: 100% (n=43)  control marks OFF: 30%
+tritan min per-marble max|dL*| (marks on vs off) = 47.2  [per type min: plus 51, triangle 77, bars 47, cross 83, dot 66, ring 55]  | luminance-only type identification: 100% (n=43)  control marks OFF: 26%
+
+=== 844x390  marbles measured 43 (types 0,1,2,3,4,5), marble diameter 14.6 css px, crop 11x11 px; draw calls on/off 64/57, triangles on/off 37128/37030 ===
+normal min per-marble max|dL*| (marks on vs off) = 56.3  [per type min: plus 56, triangle 79, bars 57, cross 86, dot 62, ring 63]  | luminance-only type identification: 100% (n=43)  control marks OFF: 12%
+protan min per-marble max|dL*| (marks on vs off) = 47.1  [per type min: plus 47, triangle 81, bars 58, cross 84, dot 59, ring 57]  | luminance-only type identification: 100% (n=43)  control marks OFF: 28%
+deutan min per-marble max|dL*| (marks on vs off) = 55.8  [per type min: plus 61, triangle 78, bars 56, cross 86, dot 63, ring 65]  | luminance-only type identification: 100% (n=43)  control marks OFF: 19%
+tritan min per-marble max|dL*| (marks on vs off) = 51.9  [per type min: plus 52, triangle 78, bars 57, cross 84, dot 62, ring 59]  | luminance-only type identification: 100% (n=43)  control marks OFF: 16%
+
+=== 915x412  marbles measured 43 (types 0,1,2,3,4,5), marble diameter 15.9 css px, crop 11x11 px; draw calls on/off 65/58, triangles on/off 37128/37032 ===
+normal min per-marble max|dL*| (marks on vs off) = 53.5  [per type min: plus 58, triangle 77, bars 54, cross 86, dot 63, ring 62]  | luminance-only type identification: 98% (n=43)  control marks OFF: 23%
+protan min per-marble max|dL*| (marks on vs off) = 49.1  [per type min: plus 49, triangle 78, bars 56, cross 85, dot 61, ring 56]  | luminance-only type identification: 98% (n=43)  control marks OFF: 26%
+deutan min per-marble max|dL*| (marks on vs off) = 52.1  [per type min: plus 63, triangle 75, bars 52, cross 86, dot 65, ring 65]  | luminance-only type identification: 98% (n=43)  control marks OFF: 23%
+tritan min per-marble max|dL*| (marks on vs off) = 53.5  [per type min: plus 53, triangle 76, bars 54, cross 84, dot 64, ring 58]  | luminance-only type identification: 98% (n=43)  control marks OFF: 21%
+PASS  360x640 normal: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 53.5)
+PASS  360x640 normal: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 16%)
+PASS  360x640 normal: control (marks off) cannot identify the type from luminance structure (16% <= 50%)
+PASS  360x640 protan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 55.6)
+PASS  360x640 protan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 20%)
+PASS  360x640 protan: control (marks off) cannot identify the type from luminance structure (20% <= 50%)
+PASS  360x640 deutan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 52.2)
+PASS  360x640 deutan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 16%)
+PASS  360x640 deutan: control (marks off) cannot identify the type from luminance structure (16% <= 50%)
+PASS  360x640 tritan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 54.3)
+PASS  360x640 tritan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 20%)
+PASS  360x640 tritan: control (marks off) cannot identify the type from luminance structure (20% <= 50%)
+PASS  390x844 normal: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 54.0)
+PASS  390x844 normal: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 26%)
+PASS  390x844 normal: control (marks off) cannot identify the type from luminance structure (26% <= 50%)
+PASS  390x844 protan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 56.2)
+PASS  390x844 protan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 30%)
+PASS  390x844 protan: control (marks off) cannot identify the type from luminance structure (30% <= 50%)
+PASS  390x844 deutan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 52.7)
+PASS  390x844 deutan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 23%)
+PASS  390x844 deutan: control (marks off) cannot identify the type from luminance structure (23% <= 50%)
+PASS  390x844 tritan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 55.2)
+PASS  390x844 tritan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 26%)
+PASS  390x844 tritan: control (marks off) cannot identify the type from luminance structure (26% <= 50%)
+PASS  412x915 normal: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 53.8)
+PASS  412x915 normal: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 19%)
+PASS  412x915 normal: control (marks off) cannot identify the type from luminance structure (19% <= 50%)
+PASS  412x915 protan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 56.3)
+PASS  412x915 protan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 35%)
+PASS  412x915 protan: control (marks off) cannot identify the type from luminance structure (35% <= 50%)
+PASS  412x915 deutan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 52.2)
+PASS  412x915 deutan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 26%)
+PASS  412x915 deutan: control (marks off) cannot identify the type from luminance structure (26% <= 50%)
+PASS  412x915 tritan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 55.3)
+PASS  412x915 tritan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 23%)
+PASS  412x915 tritan: control (marks off) cannot identify the type from luminance structure (23% <= 50%)
+PASS  640x360 normal: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 45.9)
+PASS  640x360 normal: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 28%)
+PASS  640x360 normal: control (marks off) cannot identify the type from luminance structure (28% <= 50%)
+PASS  640x360 protan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 45.8)
+PASS  640x360 protan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 19%)
+PASS  640x360 protan: control (marks off) cannot identify the type from luminance structure (19% <= 50%)
+PASS  640x360 deutan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 44.6)
+PASS  640x360 deutan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 30%)
+PASS  640x360 deutan: control (marks off) cannot identify the type from luminance structure (30% <= 50%)
+PASS  640x360 tritan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 47.2)
+PASS  640x360 tritan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 26%)
+PASS  640x360 tritan: control (marks off) cannot identify the type from luminance structure (26% <= 50%)
+PASS  844x390 normal: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 56.3)
+PASS  844x390 normal: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 12%)
+PASS  844x390 normal: control (marks off) cannot identify the type from luminance structure (12% <= 50%)
+PASS  844x390 protan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 47.1)
+PASS  844x390 protan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 28%)
+PASS  844x390 protan: control (marks off) cannot identify the type from luminance structure (28% <= 50%)
+PASS  844x390 deutan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 55.8)
+PASS  844x390 deutan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 19%)
+PASS  844x390 deutan: control (marks off) cannot identify the type from luminance structure (19% <= 50%)
+PASS  844x390 tritan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 51.9)
+PASS  844x390 tritan: marble type recovered from luminance structure alone >= 90% (got 100%, control without marks 16%)
+PASS  844x390 tritan: control (marks off) cannot identify the type from luminance structure (16% <= 50%)
+PASS  915x412 normal: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 53.5)
+PASS  915x412 normal: marble type recovered from luminance structure alone >= 90% (got 98%, control without marks 23%)
+PASS  915x412 normal: control (marks off) cannot identify the type from luminance structure (23% <= 50%)
+PASS  915x412 protan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 49.1)
+PASS  915x412 protan: marble type recovered from luminance structure alone >= 90% (got 98%, control without marks 26%)
+PASS  915x412 protan: control (marks off) cannot identify the type from luminance structure (26% <= 50%)
+PASS  915x412 deutan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 52.1)
+PASS  915x412 deutan: marble type recovered from luminance structure alone >= 90% (got 98%, control without marks 23%)
+PASS  915x412 deutan: control (marks off) cannot identify the type from luminance structure (23% <= 50%)
+PASS  915x412 tritan: every marble's mark changes luminance by >= 20 L* somewhere inside the marble (min 53.5)
+PASS  915x412 tritan: marble type recovered from luminance structure alone >= 90% (got 98%, control without marks 21%)
+PASS  915x412 tritan: control (marks off) cannot identify the type from luminance structure (21% <= 50%)
+wrote marks-sheet-390x844.png (2088, 1174)
+wrote marks-sheet-844x390.png (1788, 1006)
+
+all mark checks passed
+exit 0

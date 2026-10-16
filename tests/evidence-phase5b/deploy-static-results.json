@@ -1,0 +1,163 @@
+{
+ "base": "emulated",
+ "requestsByPath": {
+  "/": 4,
+  "/zuma3d-android.html": 6,
+  "/manifest.json": 5,
+  "/icon-192.png": 9,
+  "/main.js": 8,
+  "/core.js": 8,
+  "/view.js": 8,
+  "/render.js": 8,
+  "/quality.js": 8,
+  "/storage.js": 8,
+  "/audio.js": 8,
+  "/sw.js": 4,
+  "/icon-512.png": 5,
+  "/vendor/three.module.js": 9,
+  "/does-not-exist.js": 1,
+  "/diag.js": 3
+ },
+ "results": [
+  {
+   "name": "vercel.json: exactly one rewrite \"/\" -> \"/zuma3d-android.html\", no redirects",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "deploy dir has no index.html (so \"/\" depends on the rewrite)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "vendor/three.module.js present in the export and is the tested r160 file",
+   "ok": true,
+   "detail": "76dea8151bc9352a"
+  },
+  {
+   "name": "GET / -> 200 (rewrite, not a redirect), same bytes as the game page",
+   "ok": true,
+   "detail": "status 200, 22040 bytes"
+  },
+  {
+   "name": "GET /zuma3d-android.html -> 200 directly (no redirect loop)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "every asset referenced by the page, plus the modules, SW, manifest, icons and Three.js, returns 200 from the root path",
+   "ok": true,
+   "detail": "13 files"
+  },
+  {
+   "name": "manifest start_url and icons resolve",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Three.js is served as JavaScript (module MIME type)",
+   "ok": true,
+   "detail": "text/javascript; charset=utf-8"
+  },
+  {
+   "name": "unknown path -> 404 (no catch-all rewrite masking missing files)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "root URL: page loaded with no redirect, final path /",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "root URL: the committed Three.js r160 module is the one in use (real WebGLRenderer, same module instance)",
+   "ok": true,
+   "detail": "{\"rev\":\"160\",\"real\":true,\"canvases\":1}"
+  },
+  {
+   "name": "root URL: Three.js requested from /vendor/, no request to unpkg or any other origin",
+   "ok": true,
+   "detail": "zero off-origin attempts"
+  },
+  {
+   "name": "root URL: error screen not shown, no console errors, no failed requests",
+   "ok": true,
+   "detail": "clean"
+  },
+  {
+   "name": "root URL: diagnostics disabled by default",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "root URL: campaign level 1 starts and keeps rendering (frames advance, state playing, marble symbols on by default; no input/shot is simulated here — shooting is covered by the browser suites)",
+   "ok": true,
+   "detail": "{\"f\":144,\"calls\":63,\"st\":\"playing\",\"shots\":-1,\"marks\":true,\"cw\":390,\"sw\":390,\"so\":390}"
+  },
+  {
+   "name": "root URL: mobile layout — canvas fills the 390 px viewport, no horizontal scroll",
+   "ok": true,
+   "detail": "canvas 390, viewport 390, scrollWidth 390"
+  },
+  {
+   "name": "root URL: still no errors / off-origin requests after gameplay",
+   "ok": true,
+   "detail": "clean"
+  },
+  {
+   "name": "service worker registers with scope \"/\" from the root URL",
+   "ok": true,
+   "detail": "{\"scope\":\"/\",\"active\":true}"
+  },
+  {
+   "name": "service worker precached Three.js and the game files (offline start possible without the CDN)",
+   "ok": true,
+   "detail": "{\"v\":\"zuma3d-v2.0.5\",\"three\":true,\"main\":true}"
+  },
+  {
+   "name": "offline reload of \"/\" boots from the service-worker cache",
+   "ok": true,
+   "detail": "true"
+  },
+  {
+   "name": "game URL: page loaded with no redirect, final path /zuma3d-android.html",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "game URL: the committed Three.js r160 module is the one in use (real WebGLRenderer, same module instance)",
+   "ok": true,
+   "detail": "{\"rev\":\"160\",\"real\":true,\"canvases\":1}"
+  },
+  {
+   "name": "game URL: Three.js requested from /vendor/, no request to unpkg or any other origin",
+   "ok": true,
+   "detail": "zero off-origin attempts"
+  },
+  {
+   "name": "game URL: error screen not shown, no console errors, no failed requests",
+   "ok": true,
+   "detail": "clean"
+  },
+  {
+   "name": "game URL: diagnostics disabled by default",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "game URL: landscape layout fits, no horizontal scroll",
+   "ok": true,
+   "detail": "{\"cw\":844,\"sw\":844,\"so\":844}"
+  },
+  {
+   "name": "negative control: with vendor/three.module.js removed the CDN is attempted (blocked here) and the game cannot start — the test would catch a missing vendor file",
+   "ok": true,
+   "detail": "{\"cdnAttempt\":true,\"err\":true,\"ready\":false}"
+  },
+  {
+   "name": "no redirect responses were issued at all",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

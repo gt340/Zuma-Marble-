@@ -4,17 +4,17 @@ A marble-shooter (Zuma-style) in Three.js: arc-length chain physics, authentic m
 
 ## Run
 ```sh
-sh fetch-three.sh          # optional: download Three.js r160 into vendor/ for offline use
+sh fetch-three.sh          # optional: re-fetch/verify Three.js r160 (a verified copy is already committed in vendor/)
 python3 -m http.server 8080  # any static server; service workers need http(s), not file://
 # open http://localhost:8080/zuma3d-android.html
 ```
-If `vendor/three.module.js` is absent the game loads Three.js r160 from unpkg.
+Three.js r160 is committed in `vendor/` (MIT, see `THIRD-PARTY-NOTICES.md`) and is what the game loads; the unpkg copy is only a fallback if that file cannot be fetched.
 
 ## Test
 ```sh
 npm test                   # 63 headless tests: core rules (spec items 1-16), determinism, view framing, marble-mark drawing, adaptive-quality policy
 node tests/browser.mjs     # Playwright/Chromium UI test using a Three.js STUB (fast, not real rendering)
-REAL=1 node tests/browser.mjs   # same suite against the REAL vendor/three.module.js (software or hardware WebGL); needs `sh fetch-three.sh` first
+REAL=1 node tests/browser.mjs   # same suite against the REAL vendor/three.module.js (software or hardware WebGL); uses the committed vendor copy
 node tests/balance.mjs 12  # simulated-player balance table (12 seeded runs per level and profile)
 node tests/sensitivity.mjs # which level parameter drives late-level difficulty
 node tests/gfx-fallback.mjs   # Phase 3: URL-override fuzz, lowest-quality play, adaptive-quality wiring (ladder, revert, recovery, ceilings), WebGL context loss/restore (real r160 only)

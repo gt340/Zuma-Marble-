@@ -12,6 +12,7 @@
     "sensitivity": "node tests/sensitivity.mjs 16 7,8,10",
     "aimguide": "node tests/aimguide.mjs 120",
     "test:gfx": "node tests/gfx-fallback.mjs",
-    "balance:ci": "node tests/balance-ci.mjs 150 400"
+    "balance:ci": "node tests/balance-ci.mjs 150 400",
+    "test:deploy": "node tests/deploy-static.mjs ."
   }
 }
