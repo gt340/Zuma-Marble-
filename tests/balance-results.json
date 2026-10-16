@@ -1,0 +1,308 @@
+{
+ "expert": {
+  "1": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 11.311805555555551,
+   "score": 3478.1666666666665,
+   "cascadesPerRun": 3.3333333333333335,
+   "cascadeShare": 0.17675848489315982,
+   "lifeLossPerRun": 0,
+   "peakChain": 15.583333333333334
+  },
+  "2": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 15.940972222221957,
+   "score": 3626,
+   "cascadesPerRun": 3.75,
+   "cascadeShare": 0.14242040736240713,
+   "lifeLossPerRun": 0,
+   "peakChain": 17.333333333333332
+  },
+  "3": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 17.863194444444073,
+   "score": 3805.6666666666665,
+   "cascadesPerRun": 3.1666666666666665,
+   "cascadeShare": 0.10789004868619471,
+   "lifeLossPerRun": 0,
+   "peakChain": 18.583333333333332
+  },
+  "4": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 19.848611111110625,
+   "score": 4073.0833333333335,
+   "cascadesPerRun": 4.083333333333333,
+   "cascadeShare": 0.1178170359584521,
+   "lifeLossPerRun": 0,
+   "peakChain": 20.916666666666668
+  },
+  "5": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 23.597916666665967,
+   "score": 4361.166666666667,
+   "cascadesPerRun": 3.6666666666666665,
+   "cascadeShare": 0.09275509850927405,
+   "lifeLossPerRun": 0,
+   "peakChain": 21.333333333333332
+  },
+  "6": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 26.059027777776937,
+   "score": 4583.083333333333,
+   "cascadesPerRun": 4.5,
+   "cascadeShare": 0.09919674778085179,
+   "lifeLossPerRun": 0,
+   "peakChain": 23.166666666666668
+  },
+  "7": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 32.75486111110989,
+   "score": 4900.166666666667,
+   "cascadesPerRun": 3.75,
+   "cascadeShare": 0.06818412776396555,
+   "lifeLossPerRun": 0,
+   "peakChain": 31.75
+  },
+  "8": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 34.36805555555425,
+   "score": 5176.833333333333,
+   "cascadesPerRun": 4,
+   "cascadeShare": 0.06733278846878327,
+   "lifeLossPerRun": 0,
+   "peakChain": 35
+  },
+  "9": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 38.548611111109565,
+   "score": 5706.416666666667,
+   "cascadesPerRun": 4.25,
+   "cascadeShare": 0.06563730268753441,
+   "lifeLossPerRun": 0.25,
+   "peakChain": 38.75
+  },
+  "10": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 44.8624999999981,
+   "score": 5922.5,
+   "cascadesPerRun": 4.583333333333333,
+   "cascadeShare": 0.06293419782996736,
+   "lifeLossPerRun": 0.5,
+   "peakChain": 41.25
+  }
+ },
+ "good": {
+  "1": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 21.031944444443894,
+   "score": 3159.5833333333335,
+   "cascadesPerRun": 2.6666666666666665,
+   "cascadeShare": 0.1515396635042617,
+   "lifeLossPerRun": 0,
+   "peakChain": 17.166666666666668
+  },
+  "2": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 27.038888888888,
+   "score": 3285,
+   "cascadesPerRun": 3.3333333333333335,
+   "cascadeShare": 0.1426706674551502,
+   "lifeLossPerRun": 0,
+   "peakChain": 19.333333333333332
+  },
+  "3": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 31.811805555554397,
+   "score": 3540.5833333333335,
+   "cascadesPerRun": 2.9166666666666665,
+   "cascadeShare": 0.10741165380249064,
+   "lifeLossPerRun": 0,
+   "peakChain": 22.5
+  },
+  "4": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 44.754861111109655,
+   "score": 3682.5,
+   "cascadesPerRun": 2.5,
+   "cascadeShare": 0.07207730506772082,
+   "lifeLossPerRun": 0.25,
+   "peakChain": 26.25
+  },
+  "5": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 48.76458333333121,
+   "score": 3761,
+   "cascadesPerRun": 2.0833333333333335,
+   "cascadeShare": 0.05578864544760744,
+   "lifeLossPerRun": 0.8333333333333334,
+   "peakChain": 31.583333333333332
+  },
+  "6": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 56.53263888888663,
+   "score": 3980.75,
+   "cascadesPerRun": 2,
+   "cascadeShare": 0.0458181087918208,
+   "lifeLossPerRun": 0.9166666666666666,
+   "peakChain": 35.416666666666664
+  },
+  "7": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 65.51319444444474,
+   "score": 4214.833333333333,
+   "cascadesPerRun": 2.0833333333333335,
+   "cascadeShare": 0.04219108572484473,
+   "lifeLossPerRun": 1.1666666666666667,
+   "peakChain": 42.166666666666664
+  },
+  "8": {
+   "runs": 12,
+   "completion": 0.9166666666666666,
+   "survivalSec": 71.91805555555901,
+   "score": 4095.8333333333335,
+   "cascadesPerRun": 2.25,
+   "cascadeShare": 0.04170618736570361,
+   "lifeLossPerRun": 1.3333333333333333,
+   "peakChain": 47.166666666666664
+  },
+  "9": {
+   "runs": 12,
+   "completion": 0.8333333333333334,
+   "survivalSec": 81.9006944444557,
+   "score": 4169.75,
+   "cascadesPerRun": 3,
+   "cascadeShare": 0.050351999677280955,
+   "lifeLossPerRun": 2,
+   "peakChain": 53.083333333333336
+  },
+  "10": {
+   "runs": 12,
+   "completion": 0.4166666666666667,
+   "survivalSec": 92.25138888890837,
+   "score": 3486.25,
+   "cascadesPerRun": 3.5,
+   "cascadeShare": 0.0524293833328344,
+   "lifeLossPerRun": 2.5833333333333335,
+   "peakChain": 63.083333333333336
+  }
+ },
+ "casual": {
+  "1": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 32.94930555555433,
+   "score": 3250.1666666666665,
+   "cascadesPerRun": 2.4166666666666665,
+   "cascadeShare": 0.12710347386817974,
+   "lifeLossPerRun": 0,
+   "peakChain": 19
+  },
+  "2": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 45.06805555555413,
+   "score": 3366.8333333333335,
+   "cascadesPerRun": 2.1666666666666665,
+   "cascadeShare": 0.09562367088936996,
+   "lifeLossPerRun": 0.3333333333333333,
+   "peakChain": 21.333333333333332
+  },
+  "3": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 50.0055555555549,
+   "score": 3530.9166666666665,
+   "cascadesPerRun": 2.5833333333333335,
+   "cascadeShare": 0.09497047531530294,
+   "lifeLossPerRun": 0.16666666666666666,
+   "peakChain": 24.833333333333332
+  },
+  "4": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 69.41250000000504,
+   "score": 3771.6666666666665,
+   "cascadesPerRun": 0.9166666666666666,
+   "cascadeShare": 0.03071214596949891,
+   "lifeLossPerRun": 0.9166666666666666,
+   "peakChain": 31.083333333333332
+  },
+  "5": {
+   "runs": 12,
+   "completion": 1,
+   "survivalSec": 77.00902777778558,
+   "score": 3629.0833333333335,
+   "cascadesPerRun": 2.4166666666666665,
+   "cascadeShare": 0.06300503894553142,
+   "lifeLossPerRun": 1.5,
+   "peakChain": 37.25
+  },
+  "6": {
+   "runs": 12,
+   "completion": 0.9166666666666666,
+   "survivalSec": 86.15069444445929,
+   "score": 3551.75,
+   "cascadesPerRun": 2.3333333333333335,
+   "cascadeShare": 0.05483027364658193,
+   "lifeLossPerRun": 2,
+   "peakChain": 41
+  },
+  "7": {
+   "runs": 12,
+   "completion": 0.75,
+   "survivalSec": 101.28750000002667,
+   "score": 3411.75,
+   "cascadesPerRun": 2.5,
+   "cascadeShare": 0.05071178204524382,
+   "lifeLossPerRun": 2.25,
+   "peakChain": 48.416666666666664
+  },
+  "8": {
+   "runs": 12,
+   "completion": 0.6666666666666666,
+   "survivalSec": 95.91180555557794,
+   "score": 3523.3333333333335,
+   "cascadesPerRun": 2.1666666666666665,
+   "cascadeShare": 0.044976984382907516,
+   "lifeLossPerRun": 2.3333333333333335,
+   "peakChain": 51.083333333333336
+  },
+  "9": {
+   "runs": 12,
+   "completion": 0.08333333333333333,
+   "survivalSec": 94.58333333335467,
+   "score": 2201,
+   "cascadesPerRun": 3.25,
+   "cascadeShare": 0.06951439134881754,
+   "lifeLossPerRun": 2.9166666666666665,
+   "peakChain": 60.083333333333336
+  },
+  "10": {
+   "runs": 12,
+   "completion": 0,
+   "survivalSec": 95.96041666668911,
+   "score": 1905,
+   "cascadesPerRun": 1.75,
+   "cascadeShare": 0.03934192971666744,
+   "lifeLossPerRun": 3,
+   "peakChain": 68.75
+  }
+ }
+}

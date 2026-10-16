@@ -1,0 +1,17 @@
+{
+  "name": "zuma3d",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/core.test.mjs tests/view.test.mjs tests/marks.test.mjs tests/quality.test.mjs",
+    "serve": "python3 -m http.server 8080",
+    "test:browser": "node tests/browser.mjs",
+    "test:real": "REAL=1 node tests/browser.mjs",
+    "balance": "node tests/balance.mjs 12",
+    "sensitivity": "node tests/sensitivity.mjs 16 7,8,10",
+    "aimguide": "node tests/aimguide.mjs 120",
+    "test:gfx": "node tests/gfx-fallback.mjs",
+    "balance:ci": "node tests/balance-ci.mjs 150 400"
+  }
+}

@@ -1,0 +1,666 @@
+{
+ "when": "2026-10-15T20:46:52.246Z",
+ "note": "Three.js replaced by tests/fixtures/three-stub.js — UI/input/loop/SW verified, WebGL output NOT verified",
+ "results": [
+  {
+   "name": "boot: menu shown after engine loads",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "boot: exactly one canvas and one render loop",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "boot: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout portrait-390x844: HUD fully inside viewport",
+   "ok": true,
+   "detail": "{\"x\":141.90625,\"y\":771.109375,\"w\":106.1875,\"h\":62.890625,\"r\":248.09375,\"b\":834}"
+  },
+  {
+   "name": "layout portrait-390x844: whole track footprint lies between the HUD bars and inside the screen",
+   "ok": true,
+   "detail": "{\"minY\":278,\"maxY\":532,\"minX\":7,\"maxX\":350,\"tb\":63,\"bt\":771,\"W\":390}"
+  },
+  {
+   "name": "layout portrait-390x844: GO banner, combo and danger text never overlap each other or the HUD",
+   "ok": true,
+   "detail": "{\"hits\":[],\"rs\":[\"banner:186-240\",\"combo:70-94\",\"danger-label:118-139\"],\"tb\":63,\"bt\":771}"
+  },
+  {
+   "name": "layout portrait-390x844: marble diameter on screen >= 14 css px (MEASURED 18.1px = 4.6% of width)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout portrait-390x844: touch targets >= 44px",
+   "ok": true,
+   "detail": "min=46"
+  },
+  {
+   "name": "layout portrait-390x844: no horizontal overflow, canvas fills viewport",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout portrait-390x844: top bar does not overlap bottom bar",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout portrait-390x844: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout portrait-360x640: HUD fully inside viewport",
+   "ok": true,
+   "detail": "{\"x\":129.609375,\"y\":570.40625,\"w\":100.78125,\"h\":59.59375,\"r\":230.390625,\"b\":630}"
+  },
+  {
+   "name": "layout portrait-360x640: whole track footprint lies between the HUD bars and inside the screen",
+   "ok": true,
+   "detail": "{\"minY\":190,\"maxY\":423,\"minX\":6,\"maxX\":323,\"tb\":63,\"bt\":570,\"W\":360}"
+  },
+  {
+   "name": "layout portrait-360x640: GO banner, combo and danger text never overlap each other or the HUD",
+   "ok": true,
+   "detail": "{\"hits\":[],\"rs\":[\"banner:170-221\",\"combo:70-91\",\"danger-label:118-138\"],\"tb\":63,\"bt\":570}"
+  },
+  {
+   "name": "layout portrait-360x640: marble diameter on screen >= 14 css px (MEASURED 16.6px = 4.6% of width)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout portrait-360x640: touch targets >= 44px",
+   "ok": true,
+   "detail": "min=44"
+  },
+  {
+   "name": "layout portrait-360x640: no horizontal overflow, canvas fills viewport",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout portrait-360x640: top bar does not overlap bottom bar",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout portrait-360x640: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout portrait-412x915: HUD fully inside viewport",
+   "ok": true,
+   "detail": "{\"x\":128.171875,\"y\":839.6875,\"w\":155.640625,\"h\":65.3125,\"r\":283.8125,\"b\":905}"
+  },
+  {
+   "name": "layout portrait-412x915: whole track footprint lies between the HUD bars and inside the screen",
+   "ok": true,
+   "detail": "{\"minY\":305,\"maxY\":573,\"minX\":7,\"maxX\":370,\"tb\":63,\"bt\":840,\"W\":412}"
+  },
+  {
+   "name": "layout portrait-412x915: GO banner, combo and danger text never overlap each other or the HUD",
+   "ok": true,
+   "detail": "{\"hits\":[],\"rs\":[\"banner:201-257\",\"combo:70-95\",\"danger-label:118-140\"],\"tb\":63,\"bt\":840}"
+  },
+  {
+   "name": "layout portrait-412x915: marble diameter on screen >= 14 css px (MEASURED 19.1px = 4.6% of width)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout portrait-412x915: touch targets >= 44px",
+   "ok": true,
+   "detail": "min=46"
+  },
+  {
+   "name": "layout portrait-412x915: no horizontal overflow, canvas fills viewport",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout portrait-412x915: top bar does not overlap bottom bar",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout portrait-412x915: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout landscape-844x390: HUD fully inside viewport",
+   "ok": true,
+   "detail": "{\"x\":340.25,\"y\":310,\"w\":163.5,\"h\":70,\"r\":503.75,\"b\":380}"
+  },
+  {
+   "name": "layout landscape-844x390: whole track footprint lies between the HUD bars and inside the screen",
+   "ok": true,
+   "detail": "{\"minY\":73,\"maxY\":304,\"minX\":246,\"maxX\":565,\"tb\":63,\"bt\":310,\"W\":844}"
+  },
+  {
+   "name": "layout landscape-844x390: GO banner, combo and danger text never overlap each other or the HUD",
+   "ok": true,
+   "detail": "{\"hits\":[],\"rs\":[\"banner:171-261\",\"combo:70-103\",\"danger-label:118-147\"],\"tb\":63,\"bt\":310}"
+  },
+  {
+   "name": "layout landscape-844x390: marble diameter on screen >= 14 css px (MEASURED 16.6px = 2.0% of width)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout landscape-844x390: touch targets >= 44px",
+   "ok": true,
+   "detail": "min=46"
+  },
+  {
+   "name": "layout landscape-844x390: no horizontal overflow, canvas fills viewport",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout landscape-844x390: top bar does not overlap bottom bar",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout landscape-844x390: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout landscape-915x412: HUD fully inside viewport",
+   "ok": true,
+   "detail": "{\"x\":375.75,\"y\":332,\"w\":163.5,\"h\":70,\"r\":539.25,\"b\":402}"
+  },
+  {
+   "name": "layout landscape-915x412: whole track footprint lies between the HUD bars and inside the screen",
+   "ok": true,
+   "detail": "{\"minY\":73,\"maxY\":326,\"minX\":264,\"maxX\":615,\"tb\":63,\"bt\":332,\"W\":915}"
+  },
+  {
+   "name": "layout landscape-915x412: GO banner, combo and danger text never overlap each other or the HUD",
+   "ok": true,
+   "detail": "{\"hits\":[],\"rs\":[\"banner:171-261\",\"combo:70-103\",\"danger-label:118-147\"],\"tb\":63,\"bt\":332}"
+  },
+  {
+   "name": "layout landscape-915x412: marble diameter on screen >= 14 css px (MEASURED 18.2px = 2.0% of width)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout landscape-915x412: touch targets >= 44px",
+   "ok": true,
+   "detail": "min=46"
+  },
+  {
+   "name": "layout landscape-915x412: no horizontal overflow, canvas fills viewport",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout landscape-915x412: top bar does not overlap bottom bar",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout landscape-915x412: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout landscape-640x360: HUD fully inside viewport",
+   "ok": true,
+   "detail": "{\"x\":238.25,\"y\":280,\"w\":163.5,\"h\":70,\"r\":401.75,\"b\":350}"
+  },
+  {
+   "name": "layout landscape-640x360: whole track footprint lies between the HUD bars and inside the screen",
+   "ok": true,
+   "detail": "{\"minY\":72,\"maxY\":274,\"minX\":167,\"maxX\":445,\"tb\":63,\"bt\":280,\"W\":640}"
+  },
+  {
+   "name": "layout landscape-640x360: GO banner, combo and danger text never overlap each other or the HUD",
+   "ok": true,
+   "detail": "{\"hits\":[],\"rs\":[\"banner:171-257\",\"combo:70-103\",\"danger-label:118-147\"],\"tb\":63,\"bt\":280}"
+  },
+  {
+   "name": "layout landscape-640x360: marble diameter on screen >= 14 css px (MEASURED 14.4px = 2.3% of width)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout landscape-640x360: touch targets >= 44px",
+   "ok": true,
+   "detail": "min=46"
+  },
+  {
+   "name": "layout landscape-640x360: no horizontal overflow, canvas fills viewport",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout landscape-640x360: top bar does not overlap bottom bar",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout landscape-640x360: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout desktop-1280x720: HUD fully inside viewport",
+   "ok": true,
+   "detail": "{\"x\":558.25,\"y\":640,\"w\":163.5,\"h\":70,\"r\":721.75,\"b\":710}"
+  },
+  {
+   "name": "layout desktop-1280x720: whole track footprint lies between the HUD bars and inside the screen",
+   "ok": true,
+   "detail": "{\"minY\":79,\"maxY\":634,\"minX\":213,\"maxX\":985,\"tb\":63,\"bt\":640,\"W\":1280}"
+  },
+  {
+   "name": "layout desktop-1280x720: GO banner, combo and danger text never overlap each other or the HUD",
+   "ok": true,
+   "detail": "{\"hits\":[],\"rs\":[\"banner:171-261\",\"combo:70-103\",\"danger-label:118-147\"],\"tb\":63,\"bt\":640}"
+  },
+  {
+   "name": "layout desktop-1280x720: marble diameter on screen >= 14 css px (MEASURED 39.7px = 3.1% of width)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout desktop-1280x720: touch targets >= 44px",
+   "ok": true,
+   "detail": "min=46"
+  },
+  {
+   "name": "layout desktop-1280x720: no horizontal overflow, canvas fills viewport",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout desktop-1280x720: top bar does not overlap bottom bar",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "layout desktop-1280x720: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "resize: camera re-framed on orientation change and restored",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "resize: no errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "input: touch drag updates aim and release fires exactly one shot",
+   "ok": true,
+   "detail": "shots 0->1"
+  },
+  {
+   "name": "input: pointercancel does NOT shoot and clears the pointer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "input: a plain tap shoots toward the tapped point",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "input: aim equals the ground point under the finger (no parallax error)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "input: 12 rapid taps are limited by the shot cooldown (<= game-time elapsed/0.2 + 1)",
+   "ok": true,
+   "detail": "shots=4 in 1.20s"
+  },
+  {
+   "name": "input: tray tap swaps current/next; Space swaps back",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "input: no errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "pause: overlay shown, game frozen (chain, projectiles, timers)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "pause: resume continues the simulation",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "pause: Escape resumes",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "pause: no errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "playthrough: level 1 completes and the complete screen shows stars",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "playthrough: progress persisted (level 2 unlocked, stars, best score)",
+   "ok": true,
+   "detail": "{\"u\":2,\"s\":{\"1\":2},\"b\":3346}"
+  },
+  {
+   "name": "playthrough: completion rewards only once",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "playthrough: Next level starts level 2 cleanly",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "playthrough: level grid unlocks level 2 and locks level 3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "playthrough: no console errors during a full level",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "game over: reached with 0 lives; screen shows score, level, combo",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "restart: clean state (3 lives, score 0, empty chain, full queue), one loop, one canvas",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "restart: no new GPU objects created per restart (live geometries; <=2 lazily-created materials)",
+   "ok": true,
+   "detail": "live +0 geo, +2 mat"
+  },
+  {
+   "name": "game over: no errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "endless: clears wave 1 and continues into wave 2 automatically",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "endless: no level-complete modal in endless",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "15 rapid restarts: no live GPU object growth, still one loop & one canvas",
+   "ok": true,
+   "detail": "live +0 geo, +0 mat"
+  },
+  {
+   "name": "endless: no errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "settings: toggles persist to localStorage",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "settings: restored after reload",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "storage blocked: game still runs without errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "service worker: registered and active",
+   "ok": true,
+   "detail": "zuma3d-v2.0.5"
+  },
+  {
+   "name": "service worker: all game files + vendored engine cached",
+   "ok": true,
+   "detail": "missing: "
+  },
+  {
+   "name": "service worker: page boots fully OFFLINE and shows the menu",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "service worker: a level starts offline",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "service worker: ?debug=1 diagnostics also work fully OFFLINE (diag.js is precached)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "service worker: no page/console/http errors (offline stale-while-revalidate fetches are expected to fail and are ignored)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "race fuzz: 450 random UI/game operations: no inconsistent screens, invariants hold",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "race fuzz coverage: states reached {\"intro\":136,\"playing\":26,\"playing+paused\":39,\"intro+paused\":47,\"over\":48,\"complete\":34,\"overScreen\":3}",
+   "ok": true,
+   "detail": "{\"intro\":136,\"playing\":26,\"playing+paused\":39,\"intro+paused\":47,\"over\":48,\"complete\":34,\"overScreen\":3}"
+  },
+  {
+   "name": "race fuzz: still exactly one render loop and one canvas",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "race fuzz: no page/console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "diagnostics: absent without ?debug=1 (no panel, diag.js never requested, no diag object)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "diagnostics: diag.js starts no render loop of its own (no requestAnimationFrame in the module)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "diagnostics: panel shows fps/frame stats, sits below the top bar, 4 buttons >= 30px tall, still exactly one loop and one canvas",
+   "ok": true,
+   "detail": "{\"top\":67,\"topbarBottom\":63,\"w\":220.71875,\"text\":\"60 fps  p95 16.7ms  max 16.7ms (5s)\\nt 0:02  play frames 3  >33ms 0.0%\\ndpr cap 1.75  halo on  682x1477\\nheap 4.3MB  input>frame n/a\\nerrors 0\\nCopy\\nSave\\nReset\\n×\",\"buttons\":[[\"Copy\",44,30],[\"Save\",44,30],[\"Reset\",44,30],[\"×\",44,30]],\"loops\":1,\"canv\":1}"
+  },
+  {
+   "name": "diagnostics: tapping panel buttons does not fire a shot",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "diagnostics: report is valid JSON with device, frame stats, samples, events, errors",
+   "ok": true,
+   "detail": "{\"viewport\":\"390x844\",\"frames\":{\"playFrames\":47,\"meanMs\":16.67,\"p50Ms\":17,\"p95Ms\":17,\"p99Ms\":17,\"maxMs\":16.8,\"over33msPct\":0,\"over50msPct\":0,\"over100\":0,\"last5s\":{\"fps\":60,\"p95\":16.7,\"max\":16.8},\"note\":\"play frames only (level running, not paused); intervals >= 1 s are logged as frame-gap events, not counted\"},\"samples\":2}"
+  },
+  {
+   "name": "diagnostics: shot recorded an input-to-frame delay sample",
+   "ok": true,
+   "detail": "{\"n\":1,\"mean\":39.6,\"p95\":39.6,\"max\":39.6,\"note\":\"shot pointerup -> next animation-frame callback; excludes touch-panel sampling and display latency\"}"
+  },
+  {
+   "name": "diagnostics: console.error and uncaught exceptions are captured in the report",
+   "ok": true,
+   "detail": "[{\"t\":2.6,\"level\":\"error\",\"msg\":\"diag-test-console-error\"},{\"t\":2.6,\"level\":\"uncaught\",\"msg\":\"Uncaught Error: diag-test-uncaught\"}]"
+  },
+  {
+   "name": "diagnostics: Save downloads zuma-report-*.json that parses (zuma-report-2026-10-15T20-46-36-924Z.json)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "diagnostics: Copy puts the report on the clipboard (or says it is blocked)",
+   "ok": true,
+   "detail": "390x844 / ×"
+  },
+  {
+   "name": "diagnostics: ?debug=1 shows all levels open in the grid while saved progress stays at level 1",
+   "ok": true,
+   "detail": "{\"n\":10,\"lockedCount\":0,\"saved\":1}"
+  },
+  {
+   "name": "diagnostics: only the injected errors appeared on the page",
+   "ok": true,
+   "detail": "console.error: diag-test-console-error|pageerror: diag-test-uncaught"
+  },
+  {
+   "name": "marks: ON by default (saved setting, renderer and Settings switch agree)",
+   "ok": true,
+   "detail": "{\"save\":true,\"gfx\":true,\"sw\":true}"
+  },
+  {
+   "name": "marks: tray marbles carry a glyph image when marks are on",
+   "ok": true,
+   "detail": "url(data:image/png;base64,iVBORw0KGgoAAA"
+  },
+  {
+   "name": "marks: Settings switch turns them off everywhere and persists",
+   "ok": true,
+   "detail": "{\"save\":false,\"gfx\":false,\"sw\":false,\"g\":\"none\"}"
+  },
+  {
+   "name": "marks: the choice survives a reload",
+   "ok": true,
+   "detail": "{\"save\":false,\"gfx\":false}"
+  },
+  {
+   "name": "marks: switching back on restores them",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "marks: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "marks: ?marks=0 turns them off for the session without changing the saved setting",
+   "ok": true,
+   "detail": "{\"gfx\":false,\"save\":true,\"g\":\"none\"}"
+  },
+  {
+   "name": "diag audit: the module contains no network, storage, cookie or socket calls (nothing can leave the device or touch saved progress)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "diag audit: report \"page\" is the path plus whitelisted graphics flags only (no secret/token/fragment/host): /?dpr=1.25&debug=1",
+   "ok": true,
+   "detail": "/?dpr=1.25&debug=1"
+  },
+  {
+   "name": "diag audit: captured console errors have the site address stripped",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "diag audit: report carries a plain-language privacy statement and no save data (no score history, no settings object)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "diag audit: the only localStorage key is the game save (diagnostics create none): zuma3d.v2",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "diag audit: no request leaves the origin while diagnostics run",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "diag audit: paused frames are not counted as play frames, still one loop/one canvas",
+   "ok": true,
+   "detail": "{\"paused\":{\"loops\":1,\"canv\":1,\"f\":20},\"f2\":20}"
+  },
+  {
+   "name": "diag audit: after rotation the panel is inside the viewport, viewport event logged, one loop/one canvas",
+   "ok": true,
+   "detail": "{\"inside\":true,\"loops\":1,\"canv\":1,\"vp\":\"844x390\",\"ev\":true}"
+  },
+  {
+   "name": "diag audit: the saved progress string is byte-identical before and after a whole diagnostics session incl. Reset (nothing written, nothing corrupted)",
+   "ok": true,
+   "detail": "\"{\\\"sfx\\\":true,\\\"volume\\\":0.8,\\\"haptics\\\":true,\\\"guide\\\":false,\\\"marks\\\":true,\\\" / \"{\\\"sfx\\\":true,\\\"volume\\\":0.8,\\\"haptics\\\":true,\\\"guide\\\":false,\\\"marks\\\":true,\\\""
+  },
+  {
+   "name": "diag audit: no unexpected errors",
+   "ok": true,
+   "detail": "console.error: boom at http://127.0.0.1:45329/main.js:1:1"
+  },
+  {
+   "name": "audio: no AudioContext is created before any user gesture",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "audio: after a real touch gesture the AudioContext exists and is running",
+   "ok": true,
+   "detail": "running"
+  },
+  {
+   "name": "audio: firing produces oscillator/noise voices",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "audio: no errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "failure: missing Three.js shows an error screen with guidance",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

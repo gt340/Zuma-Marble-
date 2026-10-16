@@ -1,0 +1,183 @@
+
+### E1 path
+{
+ "lengthWorldUnits": 52.8,
+ "ballDiameter": 0.96,
+ "BALL_SPACING_t": 0.028,
+ "worldSpacingBetweenNeighbours": {
+  "min": 0.36,
+  "max": 2.49,
+  "avg": 1.5
+ },
+ "spacingToDiameterRatio": {
+  "min": 0.38,
+  "max": 2.59
+ },
+ "chainSpeedWorldUnitsPerSec_atBASE_SPEED": {
+  "min": 2.2,
+  "max": 15,
+  "avg": 9.3
+ },
+ "pathStart": [
+  3.44,
+  0
+ ],
+ "pathEnd": [
+  -0.33,
+  0.94
+ ],
+ "endDistanceFromFrog": 1,
+ "selfCrossingSamples": 2204,
+ "examples": [
+  {
+   "t1": 0.006,
+   "t2": 0.571,
+   "d": 1.19
+  },
+  {
+   "t1": 0.006,
+   "t2": 0.572,
+   "d": 1.18
+  },
+  {
+   "t1": 0.006,
+   "t2": 0.573,
+   "d": 1.18
+  }
+ ]
+}
+
+### E2 first life lost (no input)
+{
+ "seconds": 2.92,
+ "livesAfter": 2,
+ "headProgressAtStart": 0.49600000000000005
+}
+
+### E3 hit test, frame dt=0.0167 (lateral offset of shot line from ball centre @ ball distance 6)
+0:HIT  0.1:HIT  0.2:HIT  0.3:HIT  0.4:miss  0.5:miss  0.6:miss  0.7:miss  0.8:miss  0.9:miss  1:miss
+
+### E3 hit test, frame dt=0.0333 (lateral offset of shot line from ball centre @ ball distance 6)
+0:miss  0.1:miss  0.2:miss  0.3:miss  0.4:miss  0.5:miss  0.6:miss  0.7:miss  0.8:miss  0.9:miss  1:miss
+
+### E3 projectile spawn height vs ball height
+{
+ "projectileY": 1.4,
+ "ballY": 0.5,
+ "deltaY": 0.9,
+ "ballDiameter": 0.96,
+ "analyticEffectiveHorizontalHitRadius": 0.33,
+ "perFrameStepAt60fps": 0.68
+}
+
+### E4 removeRange: spacing of neighbours after removal (1.00 = correct)
+[
+ {
+  "removed": 3,
+  "minSpacingInBallSpacings": 0.55,
+  "orderInverted": false,
+  "spacingAtJoin": 0.55
+ },
+ {
+  "removed": 4,
+  "minSpacingInBallSpacings": 0.4,
+  "orderInverted": false,
+  "spacingAtJoin": 0.4
+ },
+ {
+  "removed": 5,
+  "minSpacingInBallSpacings": 0.25,
+  "orderInverted": false,
+  "spacingAtJoin": 0.25
+ },
+ {
+  "removed": 6,
+  "minSpacingInBallSpacings": 0.1,
+  "orderInverted": false,
+  "spacingAtJoin": 0.1
+ },
+ {
+  "removed": 7,
+  "minSpacingInBallSpacings": -0.05,
+  "orderInverted": true,
+  "spacingAtJoin": -0.05
+ },
+ {
+  "removed": 9,
+  "minSpacingInBallSpacings": -0.35,
+  "orderInverted": true,
+  "spacingAtJoin": -0.35
+ }
+]
+
+### E5 cleared chain: reward & respawn
+{
+ "scoreGained": 57600,
+ "spawnInitCalls": 96,
+ "ballsOnBoardAfter": 1728,
+ "MAX_BALLS": 48
+}
+
+### E6 array order vs path order after 12 s of spawns
+{
+ "balls": 23,
+ "orderInversionPairs": 100,
+ "indexAdjacentButFarApart": 1,
+ "ofWhichSameColour": 1,
+ "lastFiveProgress": [
+  0.055,
+  0.04,
+  0.022,
+  0.021,
+  0.008
+ ],
+ "firstProgress": 0.106
+}
+
+### E7 shooter marble types over 200k shots
+{
+ "none": "77.3%",
+ "bomb": "15.9%",
+ "rainbow": "4.2%",
+ "slow": "2.6%",
+ "shareOfPowerShots": {
+  "bomb": "70%",
+  "rainbow": "19%",
+  "slow": "11%"
+ }
+}
+
+### E8 restart() then pending timers fire into the NEW game (no shot fired)
+{
+ "before": {
+  "score": 0,
+  "balls": 18
+ },
+ "after": {
+  "score": 150,
+  "balls": 13
+ },
+ "pendingTimersAtRestart": "bomb+match timers were not cancelled"
+}
+
+### E9 allocations
+{
+ "per_prepBall": {
+  "geometries": 2.2,
+  "materials": 2.2,
+  "meshes": 2.2
+ },
+ "per_spawnBurst12": {
+  "geometries": 12,
+  "materials": 12
+ }
+}
+
+### E10 camera/aim
+portrait 390x844 path points outside view: 14%
+landscape 844x390 path points outside view: 0%
+desktop 1280x720 path points outside view: 0%
+ball 6,0.5,-4 aim error 3.00° lateral miss at ball ≈ 0.38 (ball radius 0.48)
+ball -5,0.5,-6 aim error -2.11° lateral miss at ball ≈ 0.29 (ball radius 0.48)
+ball 0,0.5,-7 aim error 0.00° lateral miss at ball ≈ 0.00 (ball radius 0.48)
+ball 5,0.5,4 aim error 3.44° lateral miss at ball ≈ 0.38 (ball radius 0.48)

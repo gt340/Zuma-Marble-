@@ -1,0 +1,16 @@
+{"name":"baseline  aa=on  dpr1.75 halo=on  env=on","frameMs":637.1,"createMs":2722,"chain":59,"calls":62,"tris":41882,"px":"630x1120","aa":true}
+{"name":"aa=off","frameMs":552.2,"createMs":2828,"chain":59,"calls":62,"tris":41882,"px":"630x1120","aa":false}
+{"name":"dpr1.5","frameMs":494.2,"createMs":2734,"chain":59,"calls":62,"tris":41882,"px":"540x960","aa":true}
+{"name":"dpr1.25","frameMs":403.3,"createMs":2993,"chain":59,"calls":62,"tris":41882,"px":"450x800","aa":true}
+{"name":"dpr1.0","frameMs":309.8,"createMs":2810,"chain":59,"calls":62,"tris":41882,"px":"360x640","aa":true}
+{"name":"halo=off","frameMs":629,"createMs":2638,"chain":59,"calls":61,"tris":31970,"px":"630x1120","aa":true}
+{"name":"env=off (startup only)","frameMs":239.5,"createMs":76,"chain":59,"calls":62,"tris":41882,"px":"630x1120","aa":true}
+
+config | median frame ms | vs baseline | create ms | tris | canvas px | MSAA
+baseline  aa=on  dpr1.75 halo=on  env=on | 637.1 | 100% | 2722 | 41882 | 630x1120 | true
+aa=off | 552.2 | 87% | 2828 | 41882 | 630x1120 | false
+dpr1.5 | 494.2 | 78% | 2734 | 41882 | 540x960 | true
+dpr1.25 | 403.3 | 63% | 2993 | 41882 | 450x800 | true
+dpr1.0 | 309.8 | 49% | 2810 | 41882 | 360x640 | true
+halo=off | 629 | 99% | 2638 | 31970 | 630x1120 | true
+env=off (startup only) | 239.5 | 38% | 76 | 41882 | 630x1120 | true

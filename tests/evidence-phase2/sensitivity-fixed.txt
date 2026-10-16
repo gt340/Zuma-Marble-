@@ -1,0 +1,8 @@
+casual L7 | base: 81%/L2.2 | speed x0.90: 69%/L2.3 | speed x0.80: 100%/L1.7 | no surge: 94%/L1.7 | surge x1.4 (was higher): 81%/L2.0 | one colour less: 69%/L2.3 | power chance x1.6: 56%/L2.3
+casual L8 | base: 25%/L2.8 | speed x0.90: 75%/L2.1 | speed x0.80: 94%/L1.9 | no surge: 63%/L2.3 | surge x1.4 (was higher): 56%/L2.4 | one colour less: 75%/L2.2 | power chance x1.6: 50%/L2.5
+casual L9 | base: 6%/L2.9 | speed x0.90: 6%/L2.9 | speed x0.80: 0%/L3.0 | no surge: 31%/L2.7 | surge x1.4 (was higher): 6%/L2.9 | one colour less: 6%/L2.9 | power chance x1.6: 6%/L2.9
+casual L10 | base: 0%/L3.0 | speed x0.90: 0%/L3.0 | speed x0.80: 0%/L3.0 | no surge: 0%/L3.0 | surge x1.4 (was higher): 0%/L3.0 | one colour less: 0%/L3.0 | power chance x1.6: 0%/L3.0
+good L7 | base: 100%/L1.1 | speed x0.90: 100%/L1.1 | speed x0.80: 100%/L0.8 | no surge: 100%/L0.9 | surge x1.4 (was higher): 100%/L1.1 | one colour less: 100%/L1.2 | power chance x1.6: 100%/L1.0
+good L8 | base: 100%/L1.6 | speed x0.90: 100%/L1.3 | speed x0.80: 100%/L1.0 | no surge: 100%/L1.3 | surge x1.4 (was higher): 100%/L1.4 | one colour less: 100%/L1.2 | power chance x1.6: 94%/L1.5
+good L9 | base: 56%/L2.3 | speed x0.90: 88%/L2.0 | speed x0.80: 100%/L1.6 | no surge: 94%/L1.6 | surge x1.4 (was higher): 88%/L2.0 | one colour less: 88%/L1.8 | power chance x1.6: 75%/L2.0
+good L10 | base: 19%/L2.8 | speed x0.90: 63%/L2.3 | speed x0.80: 75%/L2.3 | no surge: 56%/L2.4 | surge x1.4 (was higher): 44%/L2.6 | one colour less: 56%/L2.4 | power chance x1.6: 19%/L2.8

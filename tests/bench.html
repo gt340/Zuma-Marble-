@@ -1,0 +1,31 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>bench</title>
+<style>html,body{margin:0;background:#000}#c{position:fixed;inset:0}</style><div id="c"></div>
+<script type="module">
+import * as THREE from '../vendor/three.module.js';
+import { createGfx } from '../render.js';
+import { Game } from '../core.js';
+window.runBench = async (cfg) => {
+  const c = document.getElementById('c');
+  const t0 = performance.now();
+  const gfx = createGfx(THREE, c, { antialias: cfg.aa, dprCap: cfg.dpr, envMap: cfg.env, envScope: cfg.scope });
+  const gl = gfx.renderer.getContext(); const px1 = new Uint8Array(4); const sync = () => gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px1);   // readPixels forces the GPU/rasterizer to finish
+  sync();
+  const tCreate = performance.now() - t0;
+  const g = new Game({ seed: 3, level: cfg.level || 10 });
+  gfx.setLevel(g.path); gfx.resize(innerWidth, innerHeight, null);
+  gfx.setQuality({ halo: cfg.halo });
+  for (let i = 0; i < 60 * (cfg.sim || 40); i++) g.advance(1 / 60);     // build a long chain, no shooting
+  const evs = g.drainEvents(); for (const e of evs) gfx.event(e, g);
+  const tEnv0 = performance.now(); gfx.ensureEnv(); sync(); const envMs = performance.now() - tEnv0;   // deferred in the game; forced here so frames are measured with reflections on
+  for (let i = 0; i < 4; i++) { gfx.frame(g, 1 / 60, { dx: 0, dz: -1, guide: true, pred: g.predict(0, -1) }); }   // warm-up (shader compile)
+  sync();
+  const N = cfg.frames || 20, times = [];
+  for (let i = 0; i < N; i++) { const t = performance.now(); gfx.frame(g, 1 / 60, { dx: 0, dz: -1, guide: true, pred: g.predict(0, -1) }); sync(); times.push(performance.now() - t); }
+  times.sort((a, b) => a - b);
+  const info = gfx.renderer.info;
+  const out = { createMs: tCreate, envMs, medianMs: times[N >> 1], meanMs: times.reduce((a, b) => a + b, 0) / N, chain: g.chain.length, calls: info.render.calls, tris: info.render.triangles, px: [gfx.renderer.domElement.width, gfx.renderer.domElement.height], aa: gl.getContextAttributes().antialias };
+  if (cfg.shot) { gfx.frame(g, 1 / 60, { dx: 0, dz: -1, guide: true, pred: g.predict(0, -1) }); out.shot = gfx.canvas.toDataURL('image/png'); const v = gfx.view; const { project } = await import('../view.js'); const cw = gfx.canvas.width, ch = gfx.canvas.height; out.marbles = g.chain.map(b => { const p = g.path.pos(b.s, {}); const q = project(v, [p.x, 0.5, p.z]); return { color: b.color, token: b.token || null, x: (q[0] + 1) / 2 * cw, y: (1 - q[1]) / 2 * ch }; }); }
+  gfx.dispose(); return out;
+};
+window.benchReady = true;
+</script>

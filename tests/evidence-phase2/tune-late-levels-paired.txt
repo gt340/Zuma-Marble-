@@ -1,0 +1,6 @@
+simulated players, 24 paired seeds per cell. cell = win% / lives lost per run
+profile | candidate | L7 | L8 | L9 | L10
+good | BEFORE (L7-10 speed 1.40/1.45/1.50/1.55) | 100%/1.1 | 100%/1.5 | 75%/2.2 | 21%/2.8
+good | AFTER  (core.js as shipped: 1.36/1.38/1.42/1.46) | 100%/1.3 | 100%/1.3 | 75%/2.2 | 38%/2.6
+casual | BEFORE (L7-10 speed 1.40/1.45/1.50/1.55) | 63%/2.3 | 25%/2.7 | 0%/3.0 | 0%/3.0
+casual | AFTER  (core.js as shipped: 1.36/1.38/1.42/1.46) | 67%/2.2 | 42%/2.6 | 4%/3.0 | 0%/3.0

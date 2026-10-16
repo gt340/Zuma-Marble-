@@ -1,0 +1,19 @@
+# SYNTHETIC frame-time profiles, 10 simulated minutes each, 5-rung ladder. A model of the policies, not measurements of any device.
+profile | policy | final rung | level changes | reverts | upgrades | % of 10 min below full quality
+--- | --- | --- | --- | --- | --- | ---
+fast 60 Hz (16.7 ms) | old (Phase 3) | 0 | 0 | 0 | 0 | 0.0%
+fast 60 Hz (16.7 ms) | new (Phase 4) | 0 | 0 | 0 | 0 | 0.0%
+fast 120 Hz (8.3 ms) | old (Phase 3) | 0 | 0 | 0 | 0 | 0.0%
+fast 120 Hz (8.3 ms) | new (Phase 4) | 0 | 0 | 0 | 0 | 0.0%
+STABLE 30 fps CAP (33.3 ms at every rung) | old (Phase 3) | 4 | 4 | 0 | 0 | 99.8%
+STABLE 30 fps CAP (33.3 ms at every rung) | new (Phase 4) | 0 | 6 | 3 | 0 | 1.5%
+overloaded, cost falls 22 %/rung (70 ms) | old (Phase 3) | 4 | 4 | 0 | 0 | 99.5%
+overloaded, cost falls 22 %/rung (70 ms) | new (Phase 4) | 4 | 4 | 0 | 0 | 99.3%
+vsync-quantised overload (36 ms @60 Hz) | old (Phase 3) | 4 | 4 | 0 | 0 | 99.6%
+vsync-quantised overload (36 ms @60 Hz) | new (Phase 4) | 1 | 7 | 3 | 0 | 99.3%
+transient: 6 s hitchy burst (45 ms) then 16.7 ms | old (Phase 3) | 3 | 3 | 0 | 0 | 99.7%
+transient: 6 s hitchy burst (45 ms) then 16.7 ms | new (Phase 4) | 0 | 2 | 0 | 1 | 2.2%
+thermal: 16.7 ms, 60-180 s heavy (40 ms @rung0, -22 %/rung), then 16.7 | old (Phase 3) | 2 | 2 | 0 | 0 | 89.7%
+thermal: 16.7 ms, 60-180 s heavy (40 ms @rung0, -22 %/rung), then 16.7 | new (Phase 4) | 0 | 4 | 0 | 2 | 22.7%
+unstable: 3 s smooth / 1 s heavy (45 ms), repeating | old (Phase 3) | 2 | 2 | 0 | 0 | 99.3%
+unstable: 3 s smooth / 1 s heavy (45 ms), repeating | new (Phase 4) | 0 | 0 | 0 | 0 | 0.0%

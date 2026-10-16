@@ -1,0 +1,261 @@
+
+> zuma3d@2.0.0 test
+> node --test tests/core.test.mjs tests/view.test.mjs
+
+TAP version 13
+# Subtest: paths: arc-length parameterisation is uniform
+ok 1 - paths: arc-length parameterisation is uniform
+  ---
+  duration_ms: 33.366152
+  type: 'test'
+  ...
+# Subtest: paths: no self-crossing, clear of the frog, long enough for every level
+ok 2 - paths: no self-crossing, clear of the frog, long enough for every level
+  ---
+  duration_ms: 252.05365
+  type: 'test'
+  ...
+# Subtest: levels: 10 campaign levels, strictly escalating, valid
+ok 3 - levels: 10 campaign levels, strictly escalating, valid
+  ---
+  duration_ms: 0.911916
+  type: 'test'
+  ...
+# Subtest: spawn generator never produces a run of three and respects the level colour count
+ok 4 - spawn generator never produces a run of three and respects the level colour count
+  ---
+  duration_ms: 78.883092
+  type: 'test'
+  ...
+# Subtest: 1. a group of three is removed
+ok 5 - 1. a group of three is removed
+  ---
+  duration_ms: 1.865706
+  type: 'test'
+  ...
+# Subtest: 2. groups of 4, 5 and larger score correctly (single match, combo 1, first shot)
+ok 6 - 2. groups of 4, 5 and larger score correctly (single match, combo 1, first shot)
+  ---
+  duration_ms: 1.599182
+  type: 'test'
+  ...
+# Subtest: 2b. streak and combo bonuses are applied exactly once
+ok 7 - 2b. streak and combo bonuses are applied exactly once
+  ---
+  duration_ms: 3.039505
+  type: 'test'
+  ...
+# Subtest: 3. insertion between two matching groups produces a physical cascade
+ok 8 - 3. insertion between two matching groups produces a physical cascade
+  ---
+  duration_ms: 1.584931
+  type: 'test'
+  ...
+# Subtest: 3b. non-matching ends: front segment stops, rear closes the gap, no secondary match
+ok 9 - 3b. non-matching ends: front segment stops, rear closes the gap, no secondary match
+  ---
+  duration_ms: 10.795579
+  type: 'test'
+  ...
+# Subtest: 3c. matching ends roll the front segment BACK (towards the entrance)
+ok 10 - 3c. matching ends roll the front segment BACK (towards the entrance)
+  ---
+  duration_ms: 1.174724
+  type: 'test'
+  ...
+# Subtest: 4. ordering and spacing hold after insertion from either side
+ok 11 - 4. ordering and spacing hold after insertion from either side
+  ---
+  duration_ms: 14.352312
+  type: 'test'
+  ...
+# Subtest: 4b. predicted impact equals the real insertion (same collision code)
+ok 12 - 4b. predicted impact equals the real insertion (same collision code)
+  ---
+  duration_ms: 2.704664
+  type: 'test'
+  ...
+# Subtest: 5. ordering and spacing hold after removals (fuzz: bot plays 20 minutes of game time)
+ok 13 - 5. ordering and spacing hold after removals (fuzz: bot plays 20 minutes of game time)
+  ---
+  duration_ms: 390.882103
+  type: 'test'
+  ...
+# Subtest: 6. bomb removes exactly the marbles within its reach and leaves a valid chain
+ok 14 - 6. bomb removes exactly the marbles within its reach and leaves a valid chain
+  ---
+  duration_ms: 0.856048
+  type: 'test'
+  ...
+# Subtest: 6b. bomb at the tail / head ends does not corrupt the chain
+ok 15 - 6b. bomb at the tail / head ends does not corrupt the chain
+  ---
+  duration_ms: 0.297718
+  type: 'test'
+  ...
+# Subtest: 7. rainbow becomes the real best colour and triggers the normal cascade
+ok 16 - 7. rainbow becomes the real best colour and triggers the normal cascade
+  ---
+  duration_ms: 0.463406
+  type: 'test'
+  ...
+# Subtest: 7b. rainbow with no useful neighbour becomes a plain marble of a real colour
+ok 17 - 7b. rainbow with no useful neighbour becomes a plain marble of a real colour
+  ---
+  duration_ms: 0.205616
+  type: 'test'
+  ...
+# Subtest: 8. slow expires and restores the original speed; re-activation refreshes (never stacks)
+ok 18 - 8. slow expires and restores the original speed; re-activation refreshes (never stacks)
+  ---
+  duration_ms: 6.853305
+  type: 'test'
+  ...
+# Subtest: 8b. reverse moves the whole chain backwards at a fixed rate, spacing preserved, then ends
+ok 19 - 8b. reverse moves the whole chain backwards at a fixed rate, spacing preserved, then ends
+  ---
+  duration_ms: 1.116034
+  type: 'test'
+  ...
+# Subtest: 9. a life is lost exactly once per endpoint crossing
+ok 20 - 9. a life is lost exactly once per endpoint crossing
+  ---
+  duration_ms: 3.419736
+  type: 'test'
+  ...
+# Subtest: 10. game over occurs when lives reach zero, once
+ok 21 - 10. game over occurs when lives reach zero, once
+  ---
+  duration_ms: 3.591804
+  type: 'test'
+  ...
+# Subtest: 11. reset() restores a clean initial state identical to a fresh game
+ok 22 - 11. reset() restores a clean initial state identical to a fresh game
+  ---
+  duration_ms: 46.16088
+  type: 'test'
+  ...
+# Subtest: 11b. restartLevel keeps score/lives but clears the board
+ok 23 - 11b. restartLevel keeps score/lives but clears the board
+  ---
+  duration_ms: 0.243968
+  type: 'test'
+  ...
+# Subtest: 12. pause freezes chain, projectiles and timers; resume continues
+ok 24 - 12. pause freezes chain, projectiles and timers; resume continues
+  ---
+  duration_ms: 0.914141
+  type: 'test'
+  ...
+# Subtest: 13. level completion triggers exactly once
+ok 25 - 13. level completion triggers exactly once
+  ---
+  duration_ms: 2.131225
+  type: 'test'
+  ...
+# Subtest: 15. empty chain mid-level refills quickly and awards nothing
+ok 26 - 15. empty chain mid-level refills quickly and awards nothing
+  ---
+  duration_ms: 3.61924
+  type: 'test'
+  ...
+# Subtest: 14. projectiles are removed after collision or expiry
+ok 27 - 14. projectiles are removed after collision or expiry
+  ---
+  duration_ms: 1.517241
+  type: 'test'
+  ...
+# Subtest: 16. rapid repeated input cannot corrupt state
+ok 28 - 16. rapid repeated input cannot corrupt state
+  ---
+  duration_ms: 39.906687
+  type: 'test'
+  ...
+# Subtest: determinism: same seed + same inputs => identical state
+ok 29 - determinism: same seed + same inputs => identical state
+  ---
+  duration_ms: 52.753832
+  type: 'test'
+  ...
+# Subtest: insertion side: a shot hitting the head side of a marble goes AFTER it
+ok 30 - insertion side: a shot hitting the head side of a marble goes AFTER it
+  ---
+  duration_ms: 0.277815
+  type: 'test'
+  ...
+# Subtest: projectile cannot tunnel through a marble at any step size
+ok 31 - projectile cannot tunnel through a marble at any step size
+  ---
+  duration_ms: 2.141814
+  type: 'test'
+  ...
+# Subtest: 18a. a skilled bot completes campaign level 1 and 2 with no invariant breach
+ok 32 - 18a. a skilled bot completes campaign level 1 and 2 with no invariant breach
+  ---
+  duration_ms: 18.118868
+  type: 'test'
+  ...
+# Subtest: aim guide with lead predicts the real insertion slot >= 95% of the time (levels 1, 4, 10)
+ok 33 - aim guide with lead predicts the real insertion slot >= 95% of the time (levels 1, 4, 10)
+  ---
+  duration_ms: 190.631891
+  type: 'test'
+  ...
+# Subtest: aim guide lead is a real correction: the static-chain guess is wrong in a large share of refill-phase shots
+ok 34 - aim guide lead is a real correction: the static-chain guess is wrong in a large share of refill-phase shots
+  ---
+  duration_ms: 11.743833
+  type: 'test'
+  ...
+# Subtest: predict(lead) equals static prediction when the chain is stationary
+ok 35 - predict(lead) equals static prediction when the chain is stationary
+  ---
+  duration_ms: 1.189967
+  type: 'test'
+  ...
+# Subtest: COLOR_CSS and COLOR_HEX describe the same six colours
+ok 36 - COLOR_CSS and COLOR_HEX describe the same six colours
+  ---
+  duration_ms: 0.227646
+  type: 'test'
+  ...
+# Subtest: campaign tuning guard: level 10 stays much harder than level 1; levels 8-10 speed stays in the tuned band
+ok 37 - campaign tuning guard: level 10 stays much harder than level 1; levels 8-10 speed stays in the tuned band
+  ---
+  duration_ms: 0.234718
+  type: 'test'
+  ...
+# Subtest: 17. camera fits every path inside the safe area at phone, tablet and desktop sizes (portrait + landscape)
+ok 38 - 17. camera fits every path inside the safe area at phone, tablet and desktop sizes (portrait + landscape)
+  ---
+  duration_ms: 196.462902
+  type: 'test'
+  ...
+# Subtest: picking: project -> unproject round-trips at marble height (no parallax error)
+ok 39 - picking: project -> unproject round-trips at marble height (no parallax error)
+  ---
+  duration_ms: 0.96214
+  type: 'test'
+  ...
+# Subtest: pointerToAim aims exactly at the world point under the finger
+ok 40 - pointerToAim aims exactly at the world point under the finger
+  ---
+  duration_ms: 1.03971
+  type: 'test'
+  ...
+# Subtest: 18. marble edges + glow (0.65 u) stay on screen for every path, orientation and phone size after the tighter fit
+ok 41 - 18. marble edges + glow (0.65 u) stay on screen for every path, orientation and phone size after the tighter fit
+  ---
+  duration_ms: 206.452731
+  type: 'test'
+  ...
+1..41
+# tests 41
+# suites 0
+# pass 41
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1858.968126
+exit 0

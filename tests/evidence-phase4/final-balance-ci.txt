@@ -1,0 +1,49 @@
+SIMULATED players (heuristic bots), not humans. Full table: 150 seeds per cell. Paired: 400 seeds per cell. Seeds from 90000 (held out).
+cell = win% [Wilson 95% CI] ; lives lost per run mean +-1.96SE
+expert L 1  n=150  win 100% [98%-100%]  lives lost 0.00 +-0.00
+expert L 2  n=150  win 100% [98%-100%]  lives lost 0.00 +-0.00
+expert L 3  n=150  win 100% [98%-100%]  lives lost 0.00 +-0.00
+expert L 4  n=150  win 100% [98%-100%]  lives lost 0.00 +-0.00
+expert L 5  n=150  win 100% [98%-100%]  lives lost 0.00 +-0.00
+expert L 6  n=150  win 100% [98%-100%]  lives lost 0.00 +-0.00
+expert L 7  n=150  win 100% [98%-100%]  lives lost 0.01 +-0.02
+expert L 8  n=150  win 100% [98%-100%]  lives lost 0.05 +-0.04
+expert L 9  n=150  win 100% [98%-100%]  lives lost 0.25 +-0.07
+expert L10  n=150  win 100% [98%-100%]  lives lost 0.49 +-0.08
+good   L 1  n=150  win 100% [98%-100%]  lives lost 0.00 +-0.00
+good   L 2  n=150  win 100% [98%-100%]  lives lost 0.00 +-0.00
+good   L 3  n=150  win 100% [98%-100%]  lives lost 0.02 +-0.02
+good   L 4  n=150  win 100% [98%-100%]  lives lost 0.18 +-0.06
+good   L 5  n=150  win 100% [98%-100%]  lives lost 0.73 +-0.07
+good   L 6  n=150  win 100% [98%-100%]  lives lost 0.94 +-0.05
+good   L 7  n=150  win 100% [98%-100%]  lives lost 1.15 +-0.07
+good   L 8  n=150  win  96% [92%-98%]  lives lost 1.45 +-0.10
+good   L 9  n=150  win  80% [73%-86%]  lives lost 2.11 +-0.09
+good   L10  n=150  win  35% [28%-43%]  lives lost 2.64 +-0.08
+casual L 1  n=150  win 100% [98%-100%]  lives lost 0.00 +-0.00
+casual L 2  n=150  win 100% [98%-100%]  lives lost 0.09 +-0.05
+casual L 3  n=150  win 100% [98%-100%]  lives lost 0.23 +-0.07
+casual L 4  n=150  win 100% [98%-100%]  lives lost 0.81 +-0.08
+casual L 5  n=150  win  99% [95%-100%]  lives lost 1.31 +-0.08
+casual L 6  n=150  win  94% [89%-97%]  lives lost 1.69 +-0.09
+casual L 7  n=150  win  81% [74%-86%]  lives lost 2.09 +-0.09
+casual L 8  n=150  win  41% [34%-49%]  lives lost 2.57 +-0.08
+casual L 9  n=150  win   4% [2%-8%]  lives lost 2.96 +-0.03
+casual L10  n=150  win   1% [0%-4%]  lives lost 2.99 +-0.01
+
+Paired BEFORE vs AFTER (late-level speed change), same 400 seeds per cell. b = won only AFTER, c = won only BEFORE; p = exact two-sided sign test on discordant pairs
+expert L 7  BEFORE 100% [99%-100%]  AFTER 100% [99%-100%]  diff 0.0pp  b=0 c=0 p=1.0e+0  d(lives lost) -0.02 +-0.02
+expert L 8  BEFORE 100% [99%-100%]  AFTER 100% [99%-100%]  diff 0.0pp  b=0 c=0 p=1.0e+0  d(lives lost) -0.05 +-0.03
+expert L 9  BEFORE 100% [99%-100%]  AFTER 100% [99%-100%]  diff 0.0pp  b=0 c=0 p=1.0e+0  d(lives lost) -0.10 +-0.06
+expert L10  BEFORE 100% [99%-100%]  AFTER 100% [99%-100%]  diff 0.0pp  b=0 c=0 p=1.0e+0  d(lives lost) -0.16 +-0.06
+good   L 7  BEFORE 100% [99%-100%]  AFTER 100% [99%-100%]  diff 0.3pp  b=1 c=0 p=1.0e+0  d(lives lost) -0.04 +-0.06
+good   L 8  BEFORE  99% [97%-100%]  AFTER  98% [96%-99%]  diff -0.8pp  b=4 c=7 p=5.5e-1  d(lives lost) -0.12 +-0.07
+good   L 9  BEFORE  76% [72%-80%]  AFTER  82% [78%-85%]  diff 6.0pp  b=66 c=42 p=2.6e-2  d(lives lost) -0.07 +-0.06
+good   L10  BEFORE  23% [19%-27%]  AFTER  35% [30%-40%]  diff 12.5pp  b=102 c=52 p=6.9e-5  d(lives lost) -0.13 +-0.06
+casual L 7  BEFORE  73% [68%-77%]  AFTER  77% [73%-81%]  diff 4.3pp  b=79 c=62 p=1.8e-1  d(lives lost) -0.06 +-0.07
+casual L 8  BEFORE  37% [32%-42%]  AFTER  47% [42%-51%]  diff 9.5pp  b=98 c=60 p=3.1e-3  d(lives lost) -0.10 +-0.06
+casual L 9  BEFORE   2% [1%-3%]  AFTER   3% [2%-5%]  diff 1.5pp  b=12 c=6 p=2.4e-1  d(lives lost) -0.01 +-0.02
+casual L10  BEFORE   0% [0%-1%]  AFTER   0% [0%-1%]  diff 0.0pp  b=0 c=0 p=1.0e+0  d(lives lost) 0.00 +-0.00
+
+integrity: level table identical before/after all runs: true
+integrity: BEFORE-first re-run is bit-identical to the original AFTER-first run (order independence + determinism), L10 good/casual, first 40 seeds: true

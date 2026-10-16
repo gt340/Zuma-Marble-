@@ -1,0 +1,9 @@
+{"name":"OLD: env on every material","frameMs":644,"createMs":62,"envMs":2530,"chain":18,"calls":276,"tris":28648,"px":"682x1477","aa":true}
+{"name":"NEW: env on marbles/metals only","frameMs":272.5,"createMs":69,"envMs":2543,"chain":18,"calls":276,"tris":28648,"px":"682x1477","aa":true}
+{"name":"no env at all (reference)","frameMs":230.9,"createMs":73,"envMs":18,"chain":18,"calls":276,"tris":28648,"px":"682x1477","aa":true}
+
+config | median frame ms | vs baseline | create ms | env build ms | tris | canvas px | MSAA
+OLD: env on every material | 644 | 100% | 62 | 2530 | 28648 | 682x1477 | true
+NEW: env on marbles/metals only | 272.5 | 42% | 69 | 2543 | 28648 | 682x1477 | true
+no env at all (reference) | 230.9 | 36% | 73 | 18 | 28648 | 682x1477 | true
+exit 0

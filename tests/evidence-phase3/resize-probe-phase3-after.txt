@@ -1,0 +1,21 @@
+
+[default] trial 0: idle calls 0, after rotate 2
+    10796 {"dprCap":1,"haloOn":false} at applySize (render.js:310:54) < at Object.resize (render.js:319:5) < at frame (main.js:340:85)
+    13655 {"dprCap":0.75,"haloOn":false} at WebGLRenderer.setPixelRatio (vendor/three.module.js:28807:9) < at applySize (render.js:309:36) < at Object.frame (render.js:488:50)
+
+[default] trial 1: idle calls 0, after rotate 2
+    10290 {"dprCap":1,"haloOn":false} at applySize (render.js:310:54) < at Object.resize (render.js:319:5) < at frame (main.js:340:85)
+    13741 {"dprCap":0.75,"haloOn":false} at WebGLRenderer.setPixelRatio (vendor/three.module.js:28807:9) < at applySize (render.js:309:36) < at Object.frame (render.js:488:50)
+
+[default] trial 2: idle calls 0, after rotate 2
+    10169 {"dprCap":1,"haloOn":false} at applySize (render.js:310:54) < at Object.resize (render.js:319:5) < at frame (main.js:340:85)
+    13810 {"dprCap":0.75,"haloOn":false} at WebGLRenderer.setPixelRatio (vendor/three.module.js:28807:9) < at applySize (render.js:309:36) < at Object.frame (render.js:488:50)
+
+[?adapt=0] trial 0: idle calls 0, after rotate 1
+    10240 {"dprCap":1.75,"haloOn":true} at applySize (render.js:310:54) < at Object.resize (render.js:319:5) < at frame (main.js:340:85)
+
+[?adapt=0] trial 1: idle calls 0, after rotate 1
+    10276 {"dprCap":1.75,"haloOn":true} at applySize (render.js:310:54) < at Object.resize (render.js:319:5) < at frame (main.js:340:85)
+
+[?adapt=0] trial 2: idle calls 0, after rotate 1
+    10096 {"dprCap":1.75,"haloOn":true} at applySize (render.js:310:54) < at Object.resize (render.js:319:5) < at frame (main.js:340:85)

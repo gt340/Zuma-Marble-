@@ -1,0 +1,25 @@
+
+=== 360x640 (CSS px; level 7 after 22 s; 6 colours seen, counts {"0":8,"1":5,"2":9,"3":9,"4":5,"5":13}) ===
+marble diameter: min 15.4 px, median 16.5 px  (ESTIMATE: 2.6 mm on screen, 0.50 deg at 30 cm = 30 arcmin); neighbour centre spacing median 15.4 px
+fingertip (~9 mm = 57 css px) covers about 3.4 marble diameters across
+normal closest pairs (CIE76 dE of rendered colours, normal vision): yellow/orange 37.5, red/orange 39.7, green/yellow 42.0, blue/purple 44.5   | pairs below 15: 0/15
+protan closest pairs (CIE76 dE of rendered colours, simulated): blue/purple 6.6, red/green 17.9, yellow/orange 20.6, green/orange 21.7   | pairs below 15: 1/15
+deutan closest pairs (CIE76 dE of rendered colours, simulated): blue/purple 8.9, red/green 15.3, yellow/orange 16.7, red/orange 21.4   | pairs below 15: 1/15
+tritan closest pairs (CIE76 dE of rendered colours, simulated): green/blue 12.8, purple/orange 18.9, red/orange 30.1, yellow/purple 34.7   | pairs below 15: 1/15
+
+=== 390x844 (CSS px; level 7 after 22 s; 6 colours seen, counts {"0":10,"1":14,"2":5,"3":10,"4":3,"5":6}) ===
+marble diameter: min 16.9 px, median 18.0 px  (ESTIMATE: 2.9 mm on screen, 0.55 deg at 30 cm = 33 arcmin); neighbour centre spacing median 16.9 px
+fingertip (~9 mm = 57 css px) covers about 3.2 marble diameters across
+normal closest pairs (CIE76 dE of rendered colours, normal vision): green/yellow 35.7, red/orange 38.1, yellow/orange 42.0, blue/purple 44.4   | pairs below 15: 0/15
+protan closest pairs (CIE76 dE of rendered colours, simulated): blue/purple 13.3, green/yellow 17.5, yellow/orange 22.2, green/orange 25.1   | pairs below 15: 1/15
+deutan closest pairs (CIE76 dE of rendered colours, simulated): blue/purple 18.5, yellow/orange 18.9, red/green 20.1, red/orange 22.0   | pairs below 15: 0/15
+tritan closest pairs (CIE76 dE of rendered colours, simulated): purple/orange 23.0, red/orange 27.2, green/blue 29.8, yellow/purple 32.1   | pairs below 15: 0/15
+
+=== 412x915 (CSS px; level 7 after 22 s; 6 colours seen, counts {"0":8,"1":9,"2":7,"3":6,"4":6,"5":11}) ===
+marble diameter: min 17.9 px, median 19.0 px  (ESTIMATE: 3.0 mm on screen, 0.58 deg at 30 cm = 35 arcmin); neighbour centre spacing median 17.9 px
+fingertip (~9 mm = 57 css px) covers about 3.0 marble diameters across
+normal closest pairs (CIE76 dE of rendered colours, normal vision): green/yellow 34.9, red/orange 35.7, blue/purple 40.1, yellow/orange 41.0   | pairs below 15: 0/15
+protan closest pairs (CIE76 dE of rendered colours, simulated): blue/purple 1.3, green/yellow 19.3, yellow/orange 26.6, green/orange 27.0   | pairs below 15: 1/15
+deutan closest pairs (CIE76 dE of rendered colours, simulated): blue/purple 13.4, red/orange 14.5, yellow/orange 21.1, red/green 21.4   | pairs below 15: 2/15
+tritan closest pairs (CIE76 dE of rendered colours, simulated): green/blue 20.4, red/orange 23.0, purple/orange 27.3, yellow/purple 29.1   | pairs below 15: 0/15
+exit 0
