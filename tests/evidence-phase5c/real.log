@@ -1,0 +1,147 @@
+PASS  boot: menu shown after engine loads
+PASS  boot: exactly one canvas and one render loop
+PASS  boot: no console errors / failed requests
+PASS  layout portrait-390x844: HUD fully inside viewport  — {"x":141.90625,"y":771.109375,"w":106.1875,"h":62.890625,"r":248.09375,"b":834}
+PASS  layout portrait-390x844: whole track footprint lies between the HUD bars and inside the screen  — {"minY":278,"maxY":532,"minX":7,"maxX":350,"tb":63,"bt":771,"W":390}
+PASS  layout portrait-390x844: GO banner, combo and danger text never overlap each other or the HUD  — {"hits":[],"rs":["banner:186-240","combo:70-94","danger-label:118-139"],"tb":63,"bt":771}
+PASS  layout portrait-390x844: marble diameter on screen >= 14 css px (MEASURED 18.1px = 4.6% of width)
+PASS  layout portrait-390x844: touch targets >= 44px  — min=46
+PASS  layout portrait-390x844: no horizontal overflow, canvas fills viewport
+PASS  layout portrait-390x844: top bar does not overlap bottom bar
+PASS  layout portrait-390x844: no console errors
+PASS  layout portrait-360x640: HUD fully inside viewport  — {"x":129.609375,"y":570.40625,"w":100.78125,"h":59.59375,"r":230.390625,"b":630}
+PASS  layout portrait-360x640: whole track footprint lies between the HUD bars and inside the screen  — {"minY":190,"maxY":423,"minX":6,"maxX":323,"tb":63,"bt":570,"W":360}
+PASS  layout portrait-360x640: GO banner, combo and danger text never overlap each other or the HUD  — {"hits":[],"rs":["banner:170-221","combo:70-91","danger-label:118-138"],"tb":63,"bt":570}
+PASS  layout portrait-360x640: marble diameter on screen >= 14 css px (MEASURED 16.6px = 4.6% of width)
+PASS  layout portrait-360x640: touch targets >= 44px  — min=44
+PASS  layout portrait-360x640: no horizontal overflow, canvas fills viewport
+PASS  layout portrait-360x640: top bar does not overlap bottom bar
+PASS  layout portrait-360x640: no console errors
+PASS  layout portrait-412x915: HUD fully inside viewport  — {"x":128.171875,"y":839.6875,"w":155.640625,"h":65.3125,"r":283.8125,"b":905}
+PASS  layout portrait-412x915: whole track footprint lies between the HUD bars and inside the screen  — {"minY":305,"maxY":573,"minX":7,"maxX":370,"tb":63,"bt":840,"W":412}
+PASS  layout portrait-412x915: GO banner, combo and danger text never overlap each other or the HUD  — {"hits":[],"rs":["banner:201-257","combo:70-95","danger-label:118-140"],"tb":63,"bt":840}
+PASS  layout portrait-412x915: marble diameter on screen >= 14 css px (MEASURED 19.1px = 4.6% of width)
+PASS  layout portrait-412x915: touch targets >= 44px  — min=46
+PASS  layout portrait-412x915: no horizontal overflow, canvas fills viewport
+PASS  layout portrait-412x915: top bar does not overlap bottom bar
+PASS  layout portrait-412x915: no console errors
+PASS  layout landscape-844x390: HUD fully inside viewport  — {"x":340.25,"y":310,"w":163.5,"h":70,"r":503.75,"b":380}
+PASS  layout landscape-844x390: whole track footprint lies between the HUD bars and inside the screen  — {"minY":73,"maxY":304,"minX":246,"maxX":565,"tb":63,"bt":310,"W":844}
+PASS  layout landscape-844x390: GO banner, combo and danger text never overlap each other or the HUD  — {"hits":[],"rs":["banner:171-261","combo:70-103","danger-label:118-147"],"tb":63,"bt":310}
+PASS  layout landscape-844x390: marble diameter on screen >= 14 css px (MEASURED 16.6px = 2.0% of width)
+PASS  layout landscape-844x390: touch targets >= 44px  — min=46
+PASS  layout landscape-844x390: no horizontal overflow, canvas fills viewport
+PASS  layout landscape-844x390: top bar does not overlap bottom bar
+PASS  layout landscape-844x390: no console errors
+PASS  layout landscape-915x412: HUD fully inside viewport  — {"x":375.75,"y":332,"w":163.5,"h":70,"r":539.25,"b":402}
+PASS  layout landscape-915x412: whole track footprint lies between the HUD bars and inside the screen  — {"minY":73,"maxY":326,"minX":264,"maxX":615,"tb":63,"bt":332,"W":915}
+PASS  layout landscape-915x412: GO banner, combo and danger text never overlap each other or the HUD  — {"hits":[],"rs":["banner:171-261","combo:70-103","danger-label:118-147"],"tb":63,"bt":332}
+PASS  layout landscape-915x412: marble diameter on screen >= 14 css px (MEASURED 18.2px = 2.0% of width)
+PASS  layout landscape-915x412: touch targets >= 44px  — min=46
+PASS  layout landscape-915x412: no horizontal overflow, canvas fills viewport
+PASS  layout landscape-915x412: top bar does not overlap bottom bar
+PASS  layout landscape-915x412: no console errors
+PASS  layout landscape-640x360: HUD fully inside viewport  — {"x":238.25,"y":280,"w":163.5,"h":70,"r":401.75,"b":350}
+PASS  layout landscape-640x360: whole track footprint lies between the HUD bars and inside the screen  — {"minY":72,"maxY":274,"minX":167,"maxX":445,"tb":63,"bt":280,"W":640}
+PASS  layout landscape-640x360: GO banner, combo and danger text never overlap each other or the HUD  — {"hits":[],"rs":["banner:171-257","combo:70-103","danger-label:118-147"],"tb":63,"bt":280}
+PASS  layout landscape-640x360: marble diameter on screen >= 14 css px (MEASURED 14.4px = 2.3% of width)
+PASS  layout landscape-640x360: touch targets >= 44px  — min=46
+PASS  layout landscape-640x360: no horizontal overflow, canvas fills viewport
+PASS  layout landscape-640x360: top bar does not overlap bottom bar
+PASS  layout landscape-640x360: no console errors
+PASS  layout desktop-960x540: HUD fully inside viewport  — {"x":398.25,"y":460,"w":163.5,"h":70,"r":561.75,"b":530}
+PASS  layout desktop-960x540: whole track footprint lies between the HUD bars and inside the screen  — {"minY":75,"maxY":454,"minX":189,"maxX":716,"tb":63,"bt":460,"W":960}
+PASS  layout desktop-960x540: GO banner, combo and danger text never overlap each other or the HUD  — {"hits":[],"rs":["banner:171-261","combo:70-103","danger-label:118-147"],"tb":63,"bt":460}
+PASS  layout desktop-960x540: marble diameter on screen >= 14 css px (MEASURED 27.2px = 2.8% of width)
+PASS  layout desktop-960x540: touch targets >= 44px  — min=46
+PASS  layout desktop-960x540: no horizontal overflow, canvas fills viewport
+PASS  layout desktop-960x540: top bar does not overlap bottom bar
+PASS  layout desktop-960x540: no console errors
+PASS  resize: camera re-framed on orientation change and restored
+PASS  resize: no errors
+PASS  input: touch drag updates aim and release fires exactly one shot  — shots 0->1
+PASS  input: pointercancel does NOT shoot and clears the pointer
+PASS  input: a plain tap shoots toward the tapped point
+PASS  input: aim equals the ground point under the finger (no parallax error)
+PASS  input: 12 rapid taps are limited by the shot cooldown (<= game-time elapsed/0.2 + 1)  — shots=10 in 3.37s
+PASS  input: tray tap swaps current/next; Space swaps back
+PASS  input: no errors
+PASS  pause: overlay shown, game frozen (chain, projectiles, timers)
+PASS  pause: resume continues the simulation
+PASS  pause: Escape resumes
+PASS  pause: no errors
+PASS  playthrough: level 1 completes and the complete screen shows stars
+PASS  playthrough: progress persisted (level 2 unlocked, stars, best score)  — {"u":2,"s":{"1":3},"b":4320}
+PASS  playthrough: completion rewards only once
+PASS  playthrough: Next level starts level 2 cleanly
+PASS  playthrough: level grid unlocks level 2 and locks level 3
+PASS  playthrough: no console errors during a full level
+PASS  game over: reached with 0 lives; screen shows score, level, combo
+PASS  restart: clean state (3 lives, score 0, empty chain, full queue), one loop, one canvas
+PASS  restart: no new GPU objects created per restart (live geometries; <=2 lazily-created materials)  — live +0 geo, +0 mat
+PASS  game over: no errors
+PASS  endless: clears wave 1 and continues into wave 2 automatically
+PASS  endless: no level-complete modal in endless
+PASS  15 rapid restarts: no live GPU object growth, still one loop & one canvas  — live +-4 geo, +0 mat
+PASS  endless: no errors
+PASS  settings: toggles persist to localStorage
+PASS  settings: restored after reload
+PASS  storage blocked: game still runs without errors
+PASS  service worker: registered and active  — zuma3d-v2.0.5
+PASS  service worker: all game files + vendored engine cached  — missing: 
+PASS  service worker: page boots fully OFFLINE and shows the menu
+PASS  service worker: a level starts offline
+PASS  service worker: ?debug=1 diagnostics also work fully OFFLINE (diag.js is precached)
+PASS  service worker: no page/console/http errors (offline stale-while-revalidate fetches are expected to fail and are ignored)
+PASS  race fuzz: 160 random UI/game operations: no inconsistent screens, invariants hold
+PASS  race fuzz coverage: states reached {"intro":48,"playing":15,"playing+paused":30,"intro+paused":7,"over":1}  — {"intro":48,"playing":15,"playing+paused":30,"intro+paused":7,"over":1}
+PASS  race fuzz: still exactly one render loop and one canvas
+PASS  race fuzz: no page/console errors
+PASS  adaptive quality: on a slow renderer it steps down after sustained overload and the step is kept because it helped (level >= 1, final rung = 0.75x + no halo on a DPR-1 screen; measured 7 s)  — {"dprCap":0.75,"haloOn":false,"adaptive":true,"level":1,"levels":2,"lastMeanMs":83.33,"windows":2,"changes":1,"reverts":0,"capSuspected":false,"probe":"down","downLocked":false,"upLocked":false,"stalls":2}
+PASS  adaptive quality: no errors and game still running
+PASS  colour separation: all 6 colours present on screen at 360x640 and the closest pair has rendered dE76 >= 33 (measured 36.9 for pair 3/5; was 23.4 before the yellow/orange re-spacing)  — {"colours":6,"counts":{"0":7,"1":6,"2":13,"3":7,"4":4,"5":7},"min":36.88535836819818,"pair":"3/5"}
+PASS  colour separation: no errors
+PASS  graphics overrides: ?aa=0&dpr=1.25&halo=0&env=0 are honoured  — {"q":{"dprCap":1.25,"haloOn":false,"adaptive":false,"level":0,"levels":2},"aa":false,"ratio":1,"env":0}
+PASS  graphics overrides: ?adapt=0 keeps adaptive quality disabled
+PASS  graphics overrides: no errors
+PASS  graphics overrides: garbage values are ignored (defaults, no errors)
+PASS  resize: setSize is never called while idle and exactly once per orientation change (was twice before Phase 3; idle 0, rotate 1)  — idle=0 afterRotate=1
+PASS  diagnostics: absent without ?debug=1 (no panel, diag.js never requested, no diag object)
+PASS  diagnostics: diag.js starts no render loop of its own (no requestAnimationFrame in the module)
+PASS  diagnostics: panel shows fps/frame stats, sits below the top bar, 4 buttons >= 30px tall, still exactly one loop and one canvas  — {"top":67,"topbarBottom":63,"w":238.78125,"text":"9.4 fps  p95 316.6ms  max 316.6ms (5s)\nt 0:06  play frames 12  >33ms 75.0%\ndpr cap 1.75  halo on  390x844\ngpu geo 35 tex 7 prog 16\nheap 11.7MB  input>frame n/a\nerrors 0\nCopy\nSave\nReset\n×","buttons":[["Copy",44,30],["Save",44,30],["Reset",44,30],["×",44,30]],"loops":1,"canv":1}
+PASS  diagnostics: tapping panel buttons does not fire a shot
+PASS  diagnostics: report is valid JSON with device, frame stats, samples, events, errors  — {"viewport":"390x844","frames":{"playFrames":43,"meanMs":88.37,"p50Ms":100,"p95Ms":167,"p99Ms":250,"maxMs":266.7,"over33msPct":76.74,"over50msPct":76.74,"over100":13,"last5s":{"fps":11.3,"p95":166.6,"max":266.7},"note":"play frames only (level running, not paused); intervals >= 1 s are logged as frame-gap events, not counted"},"samples":2}
+PASS  diagnostics: shot recorded an input-to-frame delay sample  — {"n":1,"mean":215.3,"p95":215.3,"max":215.3,"note":"shot pointerup -> next animation-frame callback; excludes touch-panel sampling and display latency"}
+PASS  diagnostics: console.error and uncaught exceptions are captured in the report  — [{"t":7.2,"level":"error","msg":"diag-test-console-error"},{"t":7.2,"level":"uncaught","msg":"Uncaught Error: diag-test-uncaught"},{"t":9.5,"level":"info","msg":"[zuma] quality down {\"action\":\"down\",\"level\":1,\"dprCap\":0.75,\"haloOn\":false,\"avgMs\":86.66,\"reason\":\"sustained overload (86.7 ms mean over 2 windows)\"}"}]
+PASS  diagnostics: Save downloads zuma-report-*.json that parses (zuma-report-2026-10-16T21-23-56-706Z.json)
+PASS  diagnostics: Copy puts the report on the clipboard (or says it is blocked)  — 390x844 / ×
+PASS  diagnostics: ?debug=1 shows all levels open in the grid while saved progress stays at level 1  — {"n":10,"lockedCount":0,"saved":1}
+PASS  diagnostics: only the injected errors appeared on the page  — console.error: diag-test-console-error|pageerror: diag-test-uncaught
+PASS  marks: ON by default (saved setting, renderer and Settings switch agree)  — {"save":true,"gfx":true,"sw":true}
+PASS  marks: tray marbles carry a glyph image when marks are on  — url(data:image/png;base64,iVBORw0KGgoAAA
+PASS  marks: cost is at most one instanced draw per marble type plus the shooter and shots (<= +12 draw calls; 54 vs 52)  — {"on":54,"off":52}
+PASS  marks: Settings switch turns them off everywhere and persists  — {"save":false,"gfx":false,"sw":false,"g":"none"}
+PASS  marks: the choice survives a reload  — {"save":false,"gfx":false}
+PASS  marks: switching back on restores them
+PASS  marks: no console errors
+PASS  marks: ?marks=0 turns them off for the session without changing the saved setting  — {"gfx":false,"save":true,"g":"none"}
+PASS  diag audit: the module contains no network, storage, cookie or socket calls (nothing can leave the device or touch saved progress)
+PASS  diag audit: report "page" is the path plus whitelisted graphics flags only (no secret/token/fragment/host): /?dpr=1.25&debug=1  — /?dpr=1.25&debug=1
+PASS  diag audit: captured console errors have the site address stripped
+PASS  diag audit: report carries a plain-language privacy statement and no save data (no score history, no settings object)
+PASS  diag audit: the only localStorage key is the game save (diagnostics create none): zuma3d.v2
+PASS  diag audit: no request leaves the origin while diagnostics run
+PASS  diag audit: paused frames are not counted as play frames, still one loop/one canvas  — {"paused":{"loops":1,"canv":1,"f":23},"f2":23}
+PASS  diag audit: after rotation the panel is inside the viewport, viewport event logged, one loop/one canvas  — {"inside":true,"loops":1,"canv":1,"vp":"844x390","ev":true}
+PASS  diag audit: the saved progress string is byte-identical before and after a whole diagnostics session incl. Reset (nothing written, nothing corrupted)  — "{\"sfx\":true,\"volume\":0.8,\"haptics\":true,\"guide\":false,\"marks\":true,\" / "{\"sfx\":true,\"volume\":0.8,\"haptics\":true,\"guide\":false,\"marks\":true,\"
+PASS  diag audit: no unexpected errors  — console.error: boom at http://127.0.0.1:39921/main.js:1:1
+PASS  offline (a): app shell loads offline from cache but, without the engine file, shows the explanatory error screen  — The 3D engine (Three.js) could not be loaded. Serve this folder over http(s) and
+PASS  offline (b): with vendor file absent the CDN fallback path loads the engine (CDN simulated)
+PASS  audio: no AudioContext is created before any user gesture
+PASS  audio: after a real touch gesture the AudioContext exists and is running  — running
+PASS  audio: firing produces oscillator/noise voices
+PASS  audio: no errors
+PASS  failure: missing Three.js shows an error screen with guidance
+
+144/144 browser checks passed
+exit 0
