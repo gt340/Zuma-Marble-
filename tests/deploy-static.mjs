@@ -6,7 +6,16 @@
 import http from 'node:http'; import fs from 'node:fs'; import path from 'node:path'; import crypto from 'node:crypto';
 import { chromium } from '/opt/npm-tools/node_modules/playwright/index.mjs';
 
-const ROOT = path.resolve(process.argv[2] || '.');
+import os from 'node:os';
+const SRC = path.resolve(process.argv[2] || '.');
+// Build the deployment set the way Vercel does: the export minus whatever .vercelignore excludes (supported syntax: "/path", "/dir/", "*.ext", "#" comments — all this file uses).
+const ignoreLines = fs.existsSync(path.join(SRC, '.vercelignore')) ? fs.readFileSync(path.join(SRC, '.vercelignore'), 'utf8').split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#')) : [];
+const isIgnored = (rel) => ignoreLines.some(l => l.startsWith('*.') ? rel.endsWith(l.slice(1)) : l.endsWith('/') ? ('/' + rel + '/').startsWith(l) || ('/' + rel).startsWith(l) : ('/' + rel) === l);
+const ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'zuma-deploy-'));
+let copied = 0, copiedBytes = 0; const skipped = [];
+(function walk(d) { for (const e of fs.readdirSync(path.join(SRC, d), { withFileTypes: true })) { const rel = path.posix.join(d, e.name); if (e.name === '.git') continue;
+  if (e.isDirectory()) { if (isIgnored(rel + '/') || isIgnored(rel)) { skipped.push(rel + '/'); continue; } walk(rel); continue; }
+  if (isIgnored(rel)) { skipped.push(rel); continue; } fs.mkdirSync(path.dirname(path.join(ROOT, rel)), { recursive: true }); fs.copyFileSync(path.join(SRC, rel), path.join(ROOT, rel)); copied++; copiedBytes += fs.statSync(path.join(ROOT, rel)).size; } })('');
 const CHROME = process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.md': 'text/markdown', '.txt': 'text/plain' };
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
@@ -33,6 +42,14 @@ const check = (name, ok, detail = '') => { results.push({ name, ok: !!ok, detail
 const sha = (f) => crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
 const get = async (u) => { const r = await fetch(BASE + u, { redirect: 'manual' }); return { status: r.status, type: r.headers.get('content-type'), body: Buffer.from(await r.arrayBuffer()), loc: r.headers.get('location') }; };
 
+// ---- 0. .vercelignore: nothing the game needs is excluded, internal material is
+const REQUIRED = ['zuma3d-android.html', 'main.js', 'core.js', 'view.js', 'render.js', 'quality.js', 'diag.js', 'audio.js', 'storage.js', 'sw.js', 'manifest.json', 'icon-192.png', 'icon-512.png', 'vendor/three.module.js', 'vendor/LICENSE-three.txt', 'THIRD-PARTY-NOTICES.md', 'vercel.json', 'package.json'];
+check('.vercelignore exists and the deployment set keeps every runtime file, the manifest/icons, vercel.json and the Three.js license notices', ignoreLines.length > 0 && REQUIRED.every(f => fs.existsSync(path.join(ROOT, f))), 'missing: ' + (REQUIRED.filter(f => !fs.existsSync(path.join(ROOT, f))).join(' ') || 'none'));
+const swSrc = fs.readFileSync(path.join(ROOT, 'sw.js'), 'utf8');
+const swList = [...swSrc.matchAll(/'\.\/([^']+)'/g)].map(m => m[1]).filter(f => !f.startsWith('http'));
+check('every file the service worker precaches survives the ignore rules', swList.length >= 12 && swList.every(f => fs.existsSync(path.join(ROOT, f))), `${swList.length} listed, missing: ${swList.filter(f => !fs.existsSync(path.join(ROOT, f))).join(' ') || 'none'}`);
+const mustGo = ['tests', 'audit', 'PHASE4-REPORT.md', 'README.md', 'fetch-three.sh'];
+check('internal material is excluded (tests/, audit/, reports, README, dev script) and no zip/bundle/sha256 is shipped', mustGo.every(f => !fs.existsSync(path.join(ROOT, f))) && !fs.readdirSync(ROOT).some(f => /\.(zip|bundle|sha256)$/.test(f)), `${copied} files / ${(copiedBytes / 1048576).toFixed(2)} MiB deployed, ${skipped.length} entries excluded`);
 // ---- 1. static facts
 check('vercel.json: exactly one rewrite "/" -> "/zuma3d-android.html", no redirects', rewrites.length === 1 && rewrites[0].source === '/' && rewrites[0].destination === '/zuma3d-android.html' && redirects.length === 0);
 check('deploy dir has no index.html (so "/" depends on the rewrite)', !fs.existsSync(path.join(ROOT, 'index.html')));

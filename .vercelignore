@@ -1,0 +1,30 @@
+# Files that exist in the repository but are NOT needed by the deployed game, its service worker or its manifest.
+# Deployed runtime (must stay): zuma3d-android.html, main.js core.js view.js render.js quality.js diag.js audio.js storage.js sw.js,
+# manifest.json, icon-192.png, icon-512.png, vendor/three.module.js, vercel.json (+ package.json, which Vercel reads).
+# Check with: node tests/deploy-static.mjs <export>   (it exports with these rules applied)
+
+# internal tests, test evidence and development benches
+/tests/
+
+# audit material (includes a copy of the original upload)
+/audit/
+
+# internal reports and device-test notes
+/AUDIT.md
+/DEVICE-TEST.md
+/PHASE2-REPORT.md
+/PHASE3-REPORT.md
+/PHASE4-REPORT.md
+/PHASE5B-REPORT.md
+/PHASE5C-REPORT.md
+/RELEASE-AUDIT.md
+/REPORT.md
+/VALIDATION.md
+/README.md
+
+# development scripts, release archives and bundles
+/fetch-three.sh
+*.zip
+*.bundle
+*.sha256
+/node_modules/
