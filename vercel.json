@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/zuma3d-android.html" }
+  ]
+}
