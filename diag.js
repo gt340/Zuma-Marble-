@@ -194,5 +194,32 @@ export function createDiag(env) {
     }
     return out;
   }
-  return { frame, input, report, snapshot, reset, frameStart, frameEnd, section };
+  function recordGpuTiming(sample) {
+    if (!sample || typeof sample !== 'object') return;
+    if (sample.type === 'status') {
+      gpuQueryStatus = typeof sample.status === 'string' ? sample.status : 'unknown';
+      gpuQueryApi = sample.api || null;
+      gpuQueryReason = sample.reason || null;
+    } else if (sample.type === 'sample' && Number.isFinite(sample.gpuMs) && sample.gpuMs >= 0) {
+      gpuQuerySamples[gpuQueryHead] = sample.gpuMs;
+      gpuQueryHead = (gpuQueryHead + 1) % gpuQuerySamples.length;
+      gpuQueryN = Math.min(gpuQueryN + 1, gpuQuerySamples.length);
+    } else if (sample.type === 'disjoint') gpuQueryDisjoint++;
+    else if (sample.type === 'skipped') gpuQuerySkipped++;
+  }
+  function gpuTimingStats() {
+    const values = Array.from(gpuQuerySamples.slice(0, gpuQueryN));
+    const sorted = values.slice().sort((a, b) => a - b);
+    const sum = values.reduce((total, value) => total + value, 0);
+    return {
+      status: gpuQueryStatus, api: gpuQueryApi, reason: gpuQueryReason,
+      n: gpuQueryN,
+      meanMs: gpuQueryN ? +(sum / gpuQueryN).toFixed(3) : null,
+      p95Ms: gpuQueryN ? +sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * 0.95))].toFixed(3) : null,
+      maxMs: gpuQueryN ? +sorted[sorted.length - 1].toFixed(3) : null,
+      disjointResultsDiscarded: gpuQueryDisjoint, skippedQueries: gpuQuerySkipped,
+      note: 'GPU execution elapsed time from EXT_disjoint_timer_query; non-blocking results only. Not display/presentation latency. Disjoint results are discarded.'
+    };
+  }
+  return { frame, input, report, snapshot, reset, frameStart, frameEnd, section, gpuTiming: recordGpuTiming };
 }
