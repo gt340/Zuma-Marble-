@@ -160,7 +160,7 @@ export function createDiag(env) {
     try { const blob = new Blob([JSON.stringify(report(), null, 1)], { type: 'application/json' }), a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'zuma-report-' + new Date().toISOString().replace(/[:.]/g, '-') + '.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); say('saved to Downloads'); }
     catch (e) { say('save failed'); }
   }
-  function reset() { hist.fill(0); ringHead = ringN = 0; frames = over33 = over50 = over100 = 0; maxMs = sumMs = 0; lat.length = 0; callbackRing.fill(0); callbackHead = callbackN = 0; callbackSum = callbackMax = 0; callbackStart = -1; longTasks.length = 0; ev('reset', 'frame and callback stats cleared'); say('stats reset'); }
+  function reset() { for (const k of Object.keys(sectionSamples)) sectionSamples[k].length = 0; hist.fill(0); ringHead = ringN = 0; frames = over33 = over50 = over100 = 0; maxMs = sumMs = 0; lat.length = 0; callbackRing.fill(0); callbackHead = callbackN = 0; callbackSum = callbackMax = 0; callbackStart = -1; longTasks.length = 0; ev('reset', 'frame and callback stats cleared'); say('stats reset'); }
   btn('Copy', copy); btn('Save', save); btn('Reset', reset);
   let hiddenPanel = false; btn('×', () => { hiddenPanel = !hiddenPanel; txt.style.display = hiddenPanel ? 'none' : ''; });
   box.append(txt, row); document.body.append(box, ta);
