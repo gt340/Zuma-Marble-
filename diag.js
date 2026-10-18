@@ -9,6 +9,10 @@
 
 export function createDiag(env) {
   const START = performance.now();
+  // Passive main-thread diagnostics. No forced GPU synchronization or extra render loop.
+  const callbackRing = new Float32Array(300);
+  let callbackHead = 0, callbackN = 0, callbackSum = 0, callbackMax = 0, callbackStart = -1;
+  const longTasks = []; let longTaskSupported = false;
   const HIST_MAX = 250;                        // 1 ms bins up to 250 ms; larger intervals land in the last bin
   const hist = new Uint32Array(HIST_MAX + 1), ring = new Float32Array(300);
   let ringHead = 0, ringN = 0, last = 0, frames = 0, over33 = 0, over50 = 0, over100 = 0, maxMs = 0, sumMs = 0;
@@ -17,6 +21,23 @@ export function createDiag(env) {
   const cap = (arr, v, n = 200) => { arr.push(v); if (arr.length > n) arr.shift(); };
   const tsec = () => +((performance.now() - START) / 1000).toFixed(1);
   const ev = (type, detail) => cap(events, { t: tsec(), type, detail });
+
+  // Observe browser-reported main-thread long tasks when supported.
+  try {
+    if (typeof PerformanceObserver !== 'undefined' &&
+        PerformanceObserver.supportedEntryTypes &&
+        PerformanceObserver.supportedEntryTypes.includes('longtask')) {
+      const observer = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          const item = { t: +((entry.startTime - START) / 1000).toFixed(1), durationMs: +entry.duration.toFixed(1) };
+          cap(longTasks, item, 200);
+          cap(events, { t: item.t, type: 'long-task', detail: item.durationMs + ' ms' });
+        }
+      });
+      observer.observe({ type: 'longtask', buffered: true });
+      longTaskSupported = true;
+    }
+  } catch { /* browser does not expose Long Tasks API */ }
 
   // ---- capture errors and the game's own console lines (the originals still run)
   // Privacy: a report is something a person copies or saves and sends on purpose; nothing is uploaded. It must not carry the host name or the full URL
@@ -40,6 +61,25 @@ export function createDiag(env) {
   try { if (navigator.getBattery) navigator.getBattery().then((b) => { battery = b; }).catch(() => {}); } catch { /* ignore */ }
 
   // ---- called from the game loop / input path
+  function frameStart() { callbackStart = performance.now(); }
+  function frameEnd(end = performance.now()) {
+    if (callbackStart < 0) return;
+    const ms = Math.max(0, end - callbackStart);
+    callbackStart = -1;
+    callbackN++; callbackSum += ms; if (ms > callbackMax) callbackMax = ms;
+    callbackRing[callbackHead] = ms; callbackHead = (callbackHead + 1) % callbackRing.length;
+  }
+  function callbackStats() {
+    const n = Math.min(callbackN, callbackRing.length);
+    if (!n) return { n: 0, meanMs: 0, p95Ms: 0, maxMs: +callbackMax.toFixed(2) };
+    const values = Array.from(callbackRing).slice(0, n).sort((a, b) => a - b);
+    return {
+      n: callbackN,
+      meanMs: +(callbackSum / callbackN).toFixed(2),
+      p95Ms: +values[Math.min(n - 1, Math.floor(n * 0.95))].toFixed(2),
+      maxMs: +callbackMax.toFixed(2)
+    };
+  }
   function frame(now) {
     const g = env.game();
     if (last && now - last < 1000) {
@@ -85,6 +125,15 @@ export function createDiag(env) {
       device: { userAgent: navigator.userAgent, platform: navigator.platform, hardwareConcurrency: navigator.hardwareConcurrency || null, deviceMemoryGB: navigator.deviceMemory || null, screen: screen.width + 'x' + screen.height, viewport: innerWidth + 'x' + innerHeight, devicePixelRatio: devicePixelRatio, orientation: (screen.orientation && screen.orientation.type) || (innerWidth > innerHeight ? 'landscape' : 'portrait'), secureContext: !!window.isSecureContext, serviceWorker: navigator.serviceWorker && navigator.serviceWorker.controller ? 'controlled' : 'none', online: navigator.onLine, gl: glInfo() },
       frames: { playFrames: frames, meanMs: frames ? +(sumMs / frames).toFixed(2) : 0, p50Ms: pct(0.5), p95Ms: pct(0.95), p99Ms: pct(0.99), maxMs: +maxMs.toFixed(1), over33msPct: frames ? +(100 * over33 / frames).toFixed(2) : 0, over50msPct: frames ? +(100 * over50 / frames).toFixed(2) : 0, over100: over100, last5s: w, note: 'play frames only (level running, not paused); intervals >= 1 s are logged as frame-gap events, not counted' },
       inputToFrameMs: Object.assign(latStats(), { note: 'shot pointerup -> next animation-frame callback; excludes touch-panel sampling and display latency' }),
+      frameCallbackMs: Object.assign(callbackStats(), { note: 'main-thread duration for the full game animation-frame callback; does not measure GPU execution or display presentation' }),
+      longTasks: {
+        supported: longTaskSupported,
+        observed: longTasks.length,
+        over50ms: longTasks.filter((x) => x.durationMs > 50).length,
+        over100ms: longTasks.filter((x) => x.durationMs > 100).length,
+        maxMs: longTasks.reduce((max, x) => Math.max(max, x.durationMs), 0),
+        recent: longTasks.slice(-20)
+      },
       now: { gpu: gpu(), heapMB: heapMB(), battery: battery ? { percent: +(battery.level * 100).toFixed(0), charging: battery.charging } : null, game: g ? { mode: g.mode, level: g.level, state: g.state, paused: g.paused, score: g.score, lives: g.lives } : null },
       privacy: 'Contains: device/browser identifiers (user agent, GPU renderer string, screen), frame-time statistics, battery level, game state, console/uncaught error text with the site address removed. Contains no save data, no URL query beyond graphics flags, no cookies, no account data. Nothing is sent anywhere by the game: Copy/Save are manual.',
       samples, events, errors,
@@ -108,7 +157,7 @@ export function createDiag(env) {
     try { const blob = new Blob([JSON.stringify(report(), null, 1)], { type: 'application/json' }), a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'zuma-report-' + new Date().toISOString().replace(/[:.]/g, '-') + '.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); say('saved to Downloads'); }
     catch (e) { say('save failed'); }
   }
-  function reset() { hist.fill(0); ringHead = ringN = 0; frames = over33 = over50 = over100 = 0; maxMs = sumMs = 0; lat.length = 0; ev('reset', 'frame stats cleared'); say('stats reset'); }
+  function reset() { hist.fill(0); ringHead = ringN = 0; frames = over33 = over50 = over100 = 0; maxMs = sumMs = 0; lat.length = 0; callbackRing.fill(0); callbackHead = callbackN = 0; callbackSum = callbackMax = 0; callbackStart = -1; longTasks.length = 0; ev('reset', 'frame and callback stats cleared'); say('stats reset'); }
   btn('Copy', copy); btn('Save', save); btn('Reset', reset);
   let hiddenPanel = false; btn('×', () => { hiddenPanel = !hiddenPanel; txt.style.display = hiddenPanel ? 'none' : ''; });
   box.append(txt, row); document.body.append(box, ta);
@@ -119,8 +168,8 @@ export function createDiag(env) {
     const w = windowStats(), L = latStats(), p = gpu(), h = heapMB(), s = tsec(), mm = String(Math.floor(s / 60)) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
     txt.textContent = `${w.fps} fps  p95 ${w.p95}ms  max ${w.max}ms (5s)\n` + `t ${mm}  play frames ${frames}  >33ms ${frames ? (100 * over33 / frames).toFixed(1) : 0}%\n` +
       (p && p.quality ? `dpr cap ${p.quality.dprCap}  halo ${p.quality.haloOn ? 'on' : 'off'}  ${p.canvas}\n` : '') + (p && p.geometries !== undefined ? `gpu geo ${p.geometries} tex ${p.textures} prog ${p.programs}\n` : '') +
-      `heap ${h === null ? 'n/a' : h + 'MB'}  input>frame ${L.n ? L.mean + 'ms (p95 ' + L.p95 + ')' : 'n/a'}\n` + `errors ${errors.filter((e) => e.level !== 'info').length}` + (flash ? '  · ' + flash : '');
+      `heap ${h === null ? 'n/a' : h + 'MB'}  input>frame ${L.n ? L.mean + 'ms (p95 ' + L.p95 + ')' : 'n/a'}\n` + `callback ${callbackStats().meanMs}ms (p95 ${callbackStats().p95Ms})  long tasks ${longTasks.length}${longTaskSupported ? '' : ' (n/a)'}\n` + `errors ${errors.filter((e) => e.level !== 'info').length}` + (flash ? '  · ' + flash : '');
   }
   setInterval(refresh, 500); setInterval(() => snapshot('auto'), 30000); snapshot('start'); refresh(); ev('diag', 'started');
-  return { frame, input, report, snapshot, reset };
+  return { frame, input, report, snapshot, reset, frameStart, frameEnd };
 }
