@@ -71,6 +71,7 @@ export function iconURL(kind, size = 96) {
 // ------------------------------------------------------------------ renderer
 export function createGfx(THREE, container, opts = {}) {
   const T = THREE;
+  const onSectionTiming = typeof opts.onSectionTiming === 'function' ? opts.onSectionTiming : null;
   const coarse = typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches;
   let dprCap = opts.dprCap || (coarse ? 1.75 : 2);
   const renderer = new T.WebGLRenderer({ antialias: opts.antialias !== false, powerPreference: 'high-performance' });
@@ -416,6 +417,7 @@ export function createGfx(THREE, container, opts = {}) {
   }
 
   function frame(game, dt, aim, rawMs) {
+    const sceneStart = onSectionTiming ? performance.now() : 0;
     time += dt;
     if (aim) { aimState.dx = aim.dx; aimState.dz = aim.dz; aimState.guide = !!aim.guide; aimState.pred = aim.pred || null; }
     // ---- frog: smooth yaw toward the true aim direction, recoil spring
@@ -547,11 +549,16 @@ export function createGfx(THREE, container, opts = {}) {
       camera.position.set(view.pos[0] + (Math.random() - 0.5) * s, view.pos[1] + (Math.random() - 0.5) * s, view.pos[2] + (Math.random() - 0.5) * s);
       camera.lookAt(view.target[0], view.target[1], view.target[2]);
     }
+    if (onSectionTiming) onSectionTiming('sceneUpdate', sceneStart, performance.now());
+    const rendererStart = onSectionTiming ? performance.now() : 0;
     renderer.render(scene, camera);
+    if (onSectionTiming) onSectionTiming('rendererRender', rendererStart, performance.now());
+    const postRenderStart = onSectionTiming ? performance.now() : 0;
     if (!envScheduled) { envScheduled = true; setTimeout(buildEnv, 60); }   // reflections are generated after the first frame is on screen
 
     // ---- adaptive quality: raw frame interval (not the game's clamped dt); paused frames (dt = 0) break the measuring window
     if (aq) { const r = aq.sample(rawMs > 0 ? rawMs : dt * 1000, dt > 0); if (r) applyLevel(r); }
+    if (onSectionTiming) onSectionTiming('postRender', postRenderStart, performance.now());
   }
 
   function clearFx() {
