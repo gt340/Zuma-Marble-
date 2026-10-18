@@ -25,6 +25,10 @@ function gfxFlags() {
     if (q.get('marks') === '0') o.marks = false;                       // A/B aid: hide the marble shapes for this page load (saved setting untouched)
     if (q.get('env') === '0') o.envMap = false;
     if (q.get('adapt') === '0') o.adaptive = false;
+    if (q.get('hudblur') === '0') {
+      document.documentElement.classList.add('hud-blur-off');
+      console.info('[zuma] HUD override', { backdropBlur: false });
+    }
     if (Object.keys(o).length) console.info('[zuma] graphics overrides', o);
   } catch { /* ignore */ }
   return o;

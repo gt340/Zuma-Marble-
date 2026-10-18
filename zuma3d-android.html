@@ -40,6 +40,8 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
   display: grid; grid-template-columns: auto auto 1fr auto; gap: 8px; align-items: stretch; }
 .pill { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 5px 12px; display: flex; flex-direction: column; justify-content: center;
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); min-height: 46px; }
+/* Diagnostic-only A/B switch: ?hudblur=0 disables blur on HUD pills without changing layout or panel styling. */
+.hud-blur-off .pill { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
 .pill small { font-size: 10px; letter-spacing: .14em; color: var(--dim); text-transform: uppercase; }
 .pill b { font-family: var(--serif); font-size: clamp(16px, 4.6vw, 22px); color: var(--gold); text-shadow: 0 0 10px rgba(255, 190, 60, .45); font-variant-numeric: tabular-nums; }
 #lives { flex-direction: row; align-items: center; gap: 3px; font-size: 20px; color: #ff6b88; text-shadow: 0 0 8px rgba(255, 70, 100, .5); }

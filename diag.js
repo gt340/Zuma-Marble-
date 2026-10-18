@@ -23,7 +23,7 @@ export function createDiag(env) {
   // (query strings can hold anything), so the origin is stripped from every captured message/stack and `page` is the path plus whitelisted graphics flags only.
   const ORIGIN = (() => { try { return location.origin && location.origin !== 'null' ? location.origin : ''; } catch { return ''; } })();
   const scrub = (s) => (ORIGIN ? String(s).split(ORIGIN).join('') : String(s));
-  const FLAGS = ['aa', 'dpr', 'halo', 'env', 'adapt', 'marks', 'debug'];
+  const FLAGS = ['aa', 'dpr', 'halo', 'env', 'adapt', 'marks', 'hudblur', 'debug'];
   const pageInfo = () => { try { const q = new URLSearchParams(location.search), keep = []; for (const k of FLAGS) if (q.has(k)) keep.push(k + '=' + String(q.get(k)).replace(/[^0-9a-z.]/gi, '').slice(0, 8)); return location.pathname + (keep.length ? '?' + keep.join('&') : ''); } catch { return ''; } };
   const fmt = (a) => { try { return scrub(a.map((x) => (x instanceof Error ? (x.stack || x.message) : typeof x === 'object' ? JSON.stringify(x) : String(x))).join(' ')).slice(0, 600); } catch { return '(unprintable)'; } };
   for (const level of ['error', 'warn', 'info']) {
