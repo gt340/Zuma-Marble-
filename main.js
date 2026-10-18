@@ -37,13 +37,14 @@ function gfxFlags() {
 // px rows occupied by the HUD (top bar bottom edge, bottom controls top edge); null when the HUD is not laid out
 // On-device diagnostics (?debug=1 only): the module is not even requested otherwise.
 let diag = null;
+const pendingGpuTiming = [];
 const DEBUG = (() => { try { return new URLSearchParams(location.search).get('debug') === '1'; } catch { return false; } })();
 // ?debug=1 lets a tester open every level in the grid for this page load only (the saved progress is never changed)
 const openTo = () => (DEBUG ? LEVEL_COUNT : save.unlocked);
 function maybeDiag() {
   try {
     if (new URLSearchParams(location.search).get('debug') !== '1') return;
-    import('./diag.js').then((m) => { diag = m.createDiag({ gfx: () => gfx, game: () => game, safeTop: () => { const h = hudSafe(); return h ? h.top : 0; }, version: 'main' }); })
+    import('./diag.js').then((m) => { diag = m.createDiag({ gfx: () => gfx, game: () => game, safeTop: () => { const h = hudSafe(); return h ? h.top : 0; }, version: 'main' }); for (const sample of pendingGpuTiming) diag.gpuTiming(sample); pendingGpuTiming.length = 0; })
       .catch((e) => console.warn('[zuma] diagnostics failed to load', e && e.message));
   } catch { /* ignore */ }
 }
@@ -383,7 +384,7 @@ async function boot() {
     showScreen('error'); return;
   }
   try {
-    gfx = createGfx(THREE, $('stage'), { ...gfxFlags(), onQuality: (q) => console.info('[zuma] quality ' + q.action, q), onSectionTiming: diag ? (name, start, end) => diag.section(name, start, end) : null });
+    gfx = createGfx(THREE, $('stage'), { ...gfxFlags(), onQuality: (q) => console.info('[zuma] quality ' + q.action, q), onSectionTiming: DEBUG ? (name, start, end) => { if (diag) diag.section(name, start, end); } : null, onGpuTiming: DEBUG ? (sample) => { if (diag) diag.gpuTiming(sample); else { pendingGpuTiming.push(sample); if (pendingGpuTiming.length > 32) pendingGpuTiming.shift(); } } : null });
   } catch (e) {
     $('error-msg').textContent = 'WebGL could not start on this device/browser. (' + (e && e.message ? e.message : e) + ')';
     showScreen('error'); return;

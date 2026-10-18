@@ -14,6 +14,8 @@ export function createDiag(env) {
   let callbackHead = 0, callbackN = 0, callbackSum = 0, callbackMax = 0, callbackStart = -1;
   // Debug-only section timings. Keep a bounded rolling window and aggregate only when exporting.
   const sectionSamples = Object.create(null);
+  const gpuQuerySamples = new Float32Array(300);
+  let gpuQueryHead = 0, gpuQueryN = 0, gpuQueryStatus = 'pending', gpuQueryApi = null, gpuQueryDisjoint = 0, gpuQuerySkipped = 0, gpuQueryReason = null;
   const longTasks = []; let longTaskSupported = false;
   const HIST_MAX = 250;                        // 1 ms bins up to 250 ms; larger intervals land in the last bin
   const hist = new Uint32Array(HIST_MAX + 1), ring = new Float32Array(300);
@@ -129,6 +131,7 @@ export function createDiag(env) {
       inputToFrameMs: Object.assign(latStats(), { note: 'shot pointerup -> next animation-frame callback; excludes touch-panel sampling and display latency' }),
       frameCallbackMs: Object.assign(callbackStats(), { note: 'main-thread duration for the full game animation-frame callback; does not measure GPU execution or display presentation' }),
       sectionTiming: sectionStats(),
+      gpuTimerQuery: gpuTimingStats(),
       longTasks: {
         supported: longTaskSupported,
         observed: longTasks.length,
@@ -160,7 +163,7 @@ export function createDiag(env) {
     try { const blob = new Blob([JSON.stringify(report(), null, 1)], { type: 'application/json' }), a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'zuma-report-' + new Date().toISOString().replace(/[:.]/g, '-') + '.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); say('saved to Downloads'); }
     catch (e) { say('save failed'); }
   }
-  function reset() { for (const k of Object.keys(sectionSamples)) { const b = sectionSamples[k]; b.values.fill(0); b.head = 0; b.n = 0; } hist.fill(0); ringHead = ringN = 0; frames = over33 = over50 = over100 = 0; maxMs = sumMs = 0; lat.length = 0; callbackRing.fill(0); callbackHead = callbackN = 0; callbackSum = callbackMax = 0; callbackStart = -1; longTasks.length = 0; ev('reset', 'frame and callback stats cleared'); say('stats reset'); }
+  function reset() { for (const k of Object.keys(sectionSamples)) { const b = sectionSamples[k]; b.values.fill(0); b.head = 0; b.n = 0; } hist.fill(0); ringHead = ringN = 0; frames = over33 = over50 = over100 = 0; maxMs = sumMs = 0; lat.length = 0; callbackRing.fill(0); callbackHead = callbackN = 0; callbackSum = callbackMax = 0; callbackStart = -1; gpuQuerySamples.fill(0); gpuQueryHead = gpuQueryN = 0; gpuQueryDisjoint = gpuQuerySkipped = 0; longTasks.length = 0; ev('reset', 'frame, callback, and GPU timing stats cleared'); say('stats reset'); }
   btn('Copy', copy); btn('Save', save); btn('Reset', reset);
   let hiddenPanel = false; btn('×', () => { hiddenPanel = !hiddenPanel; txt.style.display = hiddenPanel ? 'none' : ''; });
   box.append(txt, row); document.body.append(box, ta);
@@ -191,5 +194,32 @@ export function createDiag(env) {
     }
     return out;
   }
-  return { frame, input, report, snapshot, reset, frameStart, frameEnd, section };
+  function recordGpuTiming(sample) {
+    if (!sample || typeof sample !== 'object') return;
+    if (sample.type === 'status') {
+      gpuQueryStatus = typeof sample.status === 'string' ? sample.status : 'unknown';
+      gpuQueryApi = sample.api || null;
+      gpuQueryReason = sample.reason || null;
+    } else if (sample.type === 'sample' && Number.isFinite(sample.gpuMs) && sample.gpuMs >= 0) {
+      gpuQuerySamples[gpuQueryHead] = sample.gpuMs;
+      gpuQueryHead = (gpuQueryHead + 1) % gpuQuerySamples.length;
+      gpuQueryN = Math.min(gpuQueryN + 1, gpuQuerySamples.length);
+    } else if (sample.type === 'disjoint') gpuQueryDisjoint++;
+    else if (sample.type === 'skipped') gpuQuerySkipped++;
+  }
+  function gpuTimingStats() {
+    const values = Array.from(gpuQuerySamples.slice(0, gpuQueryN));
+    const sorted = values.slice().sort((a, b) => a - b);
+    const sum = values.reduce((total, value) => total + value, 0);
+    return {
+      status: gpuQueryStatus, api: gpuQueryApi, reason: gpuQueryReason,
+      n: gpuQueryN,
+      meanMs: gpuQueryN ? +(sum / gpuQueryN).toFixed(3) : null,
+      p95Ms: gpuQueryN ? +sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * 0.95))].toFixed(3) : null,
+      maxMs: gpuQueryN ? +sorted[sorted.length - 1].toFixed(3) : null,
+      disjointResultsDiscarded: gpuQueryDisjoint, skippedQueries: gpuQuerySkipped,
+      note: 'GPU execution elapsed time from EXT_disjoint_timer_query; non-blocking results only. Not display/presentation latency. Disjoint results are discarded.'
+    };
+  }
+  return { frame, input, report, snapshot, reset, frameStart, frameEnd, section, gpuTiming: recordGpuTiming };
 }
