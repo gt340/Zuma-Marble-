@@ -305,6 +305,7 @@ export function createGfx(THREE, container, opts = {}) {
   for (let i = 0; i < 4; i++) { const m = new T.Mesh(ballGeo, marbleMat(0)); m.visible = false; scene.add(m); const g = new T.Mesh(haloGeo, basicMat(0xffffff, 0.2, true)); m.add(g); projPool.push({ mesh: m, id: -1, trail: 0 }); }
 
   // ---- aim guide
+  const guideDotsOn = opts.guideDots !== false;
   const dots = []; for (let i = 0; i < 30; i++) { const d = new T.Mesh(partGeo, basicMat(0xffffff, 0.55, true)); d.scale.setScalar(0.07); d.visible = false; scene.add(d); dots.push(d); }
   const guideRing = new T.Mesh(unitRing, own(new T.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8, blending: T.AdditiveBlending, depthWrite: false, fog: false }))); guideRing.visible = false; scene.add(guideRing);
   const targetRing = new T.Mesh(unitRing, own(new T.MeshBasicMaterial({ color: 0xffd96a, transparent: true, opacity: 0.7, blending: T.AdditiveBlending, depthWrite: false, fog: false }))); targetRing.visible = false; scene.add(targetRing);
@@ -494,7 +495,7 @@ export function createGfx(THREE, container, opts = {}) {
       const cnt = Math.min(dots.length, Math.floor(len / 0.8));
       for (let i = 0; i < dots.length; i++) {
         const dd = dots[i];
-        if (i < cnt) { const t = (i + 1) * 0.8 / len; dd.visible = t < 1; dd.position.set(pr.x0 + dx * t, BALL_Y, pr.z0 + dz * t); dd.scale.setScalar(0.06 + 0.02 * Math.sin(time * 8 - i * 0.7)); } else dd.visible = false;
+        if (guideDotsOn && i < cnt) { const t = (i + 1) * 0.8 / len; dd.visible = t < 1; dd.position.set(pr.x0 + dx * t, BALL_Y, pr.z0 + dz * t); dd.scale.setScalar(0.06 + 0.02 * Math.sin(time * 8 - i * 0.7)); } else dd.visible = false;
       }
       guideRing.visible = pr.hit;
       if (pr.hit) {
