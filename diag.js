@@ -12,6 +12,8 @@ export function createDiag(env) {
   // Passive main-thread diagnostics. No forced GPU synchronization or extra render loop.
   const callbackRing = new Float32Array(300);
   let callbackHead = 0, callbackN = 0, callbackSum = 0, callbackMax = 0, callbackStart = -1;
+  // Debug-only section timings. Keep a bounded rolling window and aggregate only when exporting.
+  const sectionSamples = Object.create(null);
   const longTasks = []; let longTaskSupported = false;
   const HIST_MAX = 250;                        // 1 ms bins up to 250 ms; larger intervals land in the last bin
   const hist = new Uint32Array(HIST_MAX + 1), ring = new Float32Array(300);
@@ -126,6 +128,7 @@ export function createDiag(env) {
       frames: { playFrames: frames, meanMs: frames ? +(sumMs / frames).toFixed(2) : 0, p50Ms: pct(0.5), p95Ms: pct(0.95), p99Ms: pct(0.99), maxMs: +maxMs.toFixed(1), over33msPct: frames ? +(100 * over33 / frames).toFixed(2) : 0, over50msPct: frames ? +(100 * over50 / frames).toFixed(2) : 0, over100: over100, last5s: w, note: 'play frames only (level running, not paused); intervals >= 1 s are logged as frame-gap events, not counted' },
       inputToFrameMs: Object.assign(latStats(), { note: 'shot pointerup -> next animation-frame callback; excludes touch-panel sampling and display latency' }),
       frameCallbackMs: Object.assign(callbackStats(), { note: 'main-thread duration for the full game animation-frame callback; does not measure GPU execution or display presentation' }),
+      sectionTiming: sectionStats(),
       longTasks: {
         supported: longTaskSupported,
         observed: longTasks.length,
@@ -157,7 +160,7 @@ export function createDiag(env) {
     try { const blob = new Blob([JSON.stringify(report(), null, 1)], { type: 'application/json' }), a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'zuma-report-' + new Date().toISOString().replace(/[:.]/g, '-') + '.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); say('saved to Downloads'); }
     catch (e) { say('save failed'); }
   }
-  function reset() { hist.fill(0); ringHead = ringN = 0; frames = over33 = over50 = over100 = 0; maxMs = sumMs = 0; lat.length = 0; callbackRing.fill(0); callbackHead = callbackN = 0; callbackSum = callbackMax = 0; callbackStart = -1; longTasks.length = 0; ev('reset', 'frame and callback stats cleared'); say('stats reset'); }
+  function reset() { for (const k of Object.keys(sectionSamples)) sectionSamples[k].length = 0; hist.fill(0); ringHead = ringN = 0; frames = over33 = over50 = over100 = 0; maxMs = sumMs = 0; lat.length = 0; callbackRing.fill(0); callbackHead = callbackN = 0; callbackSum = callbackMax = 0; callbackStart = -1; longTasks.length = 0; ev('reset', 'frame and callback stats cleared'); say('stats reset'); }
   btn('Copy', copy); btn('Save', save); btn('Reset', reset);
   let hiddenPanel = false; btn('×', () => { hiddenPanel = !hiddenPanel; txt.style.display = hiddenPanel ? 'none' : ''; });
   box.append(txt, row); document.body.append(box, ta);
@@ -171,5 +174,20 @@ export function createDiag(env) {
       `heap ${h === null ? 'n/a' : h + 'MB'}  input>frame ${L.n ? L.mean + 'ms (p95 ' + L.p95 + ')' : 'n/a'}\n` + `callback ${callbackStats().meanMs}ms (p95 ${callbackStats().p95Ms})  long tasks ${longTasks.length}${longTaskSupported ? '' : ' (n/a)'}\n` + `errors ${errors.filter((e) => e.level !== 'info').length}` + (flash ? '  · ' + flash : '');
   }
   setInterval(refresh, 500); setInterval(() => snapshot('auto'), 30000); snapshot('start'); refresh(); ev('diag', 'started');
-  return { frame, input, report, snapshot, reset, frameStart, frameEnd };
+  function section(name, start, end) {
+    if (!Number.isFinite(start) || !Number.isFinite(end) || end < start) return;
+    let a = sectionSamples[name]; if (!a) a = sectionSamples[name] = [];
+    a.push(end - start); if (a.length > 300) a.shift();
+  }
+  function sectionStats() {
+    const out = {};
+    for (const [name, arr] of Object.entries(sectionSamples)) {
+      if (!arr.length) continue;
+      const sorted = arr.slice().sort((a, b) => a - b);
+      const sum = arr.reduce((n, v) => n + v, 0);
+      out[name] = { n: arr.length, meanMs: +(sum / arr.length).toFixed(3), p95Ms: +sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * 0.95))].toFixed(3), maxMs: +sorted[sorted.length - 1].toFixed(3) };
+    }
+    return out;
+  }
+  return { frame, input, report, snapshot, reset, frameStart, frameEnd, section };
 }

@@ -351,12 +351,22 @@ function frame(now) {
   if (innerWidth !== W || innerHeight !== H) { W = innerWidth; H = innerHeight; gfx.resize(W, H, hudSafe()); }
   let pred = null;
   if (game) {
+    let phaseStart = diag ? performance.now() : 0;
     if (!game.paused) { keyboardAim(dt); game.advance(dt); }
     for (const ev of game.drainEvents()) onEvent(ev);
-    if (game) { updateHud(dt); if (save.guide && game.state === 'playing') pred = game.predict(aim.dx, aim.dz); }
+    if (diag) diag.section('simulationEvents', phaseStart, performance.now());
+    if (game) {
+      phaseStart = diag ? performance.now() : 0;
+      updateHud(dt);
+      if (diag) diag.section('hud', phaseStart, performance.now());
+      phaseStart = diag ? performance.now() : 0;
+      if (save.guide && game.state === 'playing') pred = game.predict(aim.dx, aim.dz);
+      if (diag) diag.section('prediction', phaseStart, performance.now());
+    }
   }
+  const renderStart = diag ? performance.now() : 0;
   gfx.frame(game, game && game.paused ? 0 : dt, { dx: aim.dx, dz: aim.dz, guide: save.guide && !!pred, pred }, rawMs);
-  if (diag) diag.frameEnd(performance.now());
+  if (diag) { const renderEnd = performance.now(); diag.section('render', renderStart, renderEnd); diag.frameEnd(renderEnd); }
 }
 function startLoop() { if (rafId) return; lastT = performance.now(); rafId = requestAnimationFrame(frame); }
 
