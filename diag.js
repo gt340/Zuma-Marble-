@@ -14,6 +14,8 @@ export function createDiag(env) {
   let callbackHead = 0, callbackN = 0, callbackSum = 0, callbackMax = 0, callbackStart = -1;
   // Debug-only section timings. Keep a bounded rolling window and aggregate only when exporting.
   const sectionSamples = Object.create(null);
+  const gpuQuerySamples = new Float32Array(300);
+  let gpuQueryHead = 0, gpuQueryN = 0, gpuQueryStatus = 'pending', gpuQueryApi = null, gpuQueryDisjoint = 0, gpuQuerySkipped = 0, gpuQueryReason = null;
   const longTasks = []; let longTaskSupported = false;
   const HIST_MAX = 250;                        // 1 ms bins up to 250 ms; larger intervals land in the last bin
   const hist = new Uint32Array(HIST_MAX + 1), ring = new Float32Array(300);
