@@ -160,7 +160,7 @@ export function createDiag(env) {
     try { const blob = new Blob([JSON.stringify(report(), null, 1)], { type: 'application/json' }), a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'zuma-report-' + new Date().toISOString().replace(/[:.]/g, '-') + '.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); say('saved to Downloads'); }
     catch (e) { say('save failed'); }
   }
-  function reset() { for (const k of Object.keys(sectionSamples)) sectionSamples[k].length = 0; hist.fill(0); ringHead = ringN = 0; frames = over33 = over50 = over100 = 0; maxMs = sumMs = 0; lat.length = 0; callbackRing.fill(0); callbackHead = callbackN = 0; callbackSum = callbackMax = 0; callbackStart = -1; longTasks.length = 0; ev('reset', 'frame and callback stats cleared'); say('stats reset'); }
+  function reset() { for (const k of Object.keys(sectionSamples)) { const b = sectionSamples[k]; b.values.fill(0); b.head = 0; b.n = 0; } hist.fill(0); ringHead = ringN = 0; frames = over33 = over50 = over100 = 0; maxMs = sumMs = 0; lat.length = 0; callbackRing.fill(0); callbackHead = callbackN = 0; callbackSum = callbackMax = 0; callbackStart = -1; longTasks.length = 0; ev('reset', 'frame and callback stats cleared'); say('stats reset'); }
   btn('Copy', copy); btn('Save', save); btn('Reset', reset);
   let hiddenPanel = false; btn('×', () => { hiddenPanel = !hiddenPanel; txt.style.display = hiddenPanel ? 'none' : ''; });
   box.append(txt, row); document.body.append(box, ta);
@@ -176,16 +176,18 @@ export function createDiag(env) {
   setInterval(refresh, 500); setInterval(() => snapshot('auto'), 30000); snapshot('start'); refresh(); ev('diag', 'started');
   function section(name, start, end) {
     if (!Number.isFinite(start) || !Number.isFinite(end) || end < start) return;
-    let a = sectionSamples[name]; if (!a) a = sectionSamples[name] = [];
-    a.push(end - start); if (a.length > 300) a.shift();
+    let b = sectionSamples[name];
+    if (!b) b = sectionSamples[name] = { values: new Float32Array(300), head: 0, n: 0 };
+    b.values[b.head] = end - start; b.head = (b.head + 1) % b.values.length; b.n = Math.min(b.n + 1, b.values.length);
   }
   function sectionStats() {
     const out = {};
-    for (const [name, arr] of Object.entries(sectionSamples)) {
-      if (!arr.length) continue;
-      const sorted = arr.slice().sort((a, b) => a - b);
-      const sum = arr.reduce((n, v) => n + v, 0);
-      out[name] = { n: arr.length, meanMs: +(sum / arr.length).toFixed(3), p95Ms: +sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * 0.95))].toFixed(3), maxMs: +sorted[sorted.length - 1].toFixed(3) };
+    for (const [name, b] of Object.entries(sectionSamples)) {
+      if (!b.n) continue;
+      const values = Array.from(b.values.slice(0, b.n));
+      const sorted = values.sort((a, c) => a - c);
+      const sum = values.reduce((n, v) => n + v, 0);
+      out[name] = { n: b.n, meanMs: +(sum / b.n).toFixed(3), p95Ms: +sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * 0.95))].toFixed(3), maxMs: +sorted[sorted.length - 1].toFixed(3) };
     }
     return out;
   }
