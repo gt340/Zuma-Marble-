@@ -383,7 +383,7 @@ async function boot() {
     showScreen('error'); return;
   }
   try {
-    gfx = createGfx(THREE, $('stage'), { ...gfxFlags(), onQuality: (q) => console.info('[zuma] quality ' + q.action, q) });
+    gfx = createGfx(THREE, $('stage'), { ...gfxFlags(), onQuality: (q) => console.info('[zuma] quality ' + q.action, q), onSectionTiming: diag ? (name, start, end) => diag.section(name, start, end) : null });
   } catch (e) {
     $('error-msg').textContent = 'WebGL could not start on this device/browser. (' + (e && e.message ? e.message : e) + ')';
     showScreen('error'); return;
