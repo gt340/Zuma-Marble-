@@ -72,6 +72,7 @@ export function iconURL(kind, size = 96) {
 export function createGfx(THREE, container, opts = {}) {
   const T = THREE;
   const onSectionTiming = typeof opts.onSectionTiming === 'function' ? opts.onSectionTiming : null;
+  const onGpuTiming = typeof opts.onGpuTiming === 'function' ? opts.onGpuTiming : null;
   const coarse = typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches;
   let dprCap = opts.dprCap || (coarse ? 1.75 : 2);
   const renderer = new T.WebGLRenderer({ antialias: opts.antialias !== false, powerPreference: 'high-performance' });
@@ -79,6 +80,92 @@ export function createGfx(THREE, container, opts = {}) {
   renderer.toneMapping = T.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
   const canvas = renderer.domElement;
+
+  // Debug-only, non-blocking GPU timer queries. Never wait for a query result on the render path.
+  let gpuTimer = null;
+  function gpuTimingEvent(sample) { if (onGpuTiming) { try { onGpuTiming(sample); } catch { /* diagnostics must not affect rendering */ } } }
+  if (onGpuTiming) {
+    try {
+      const gl = renderer.getContext();
+      const ext2 = gl.getExtension('EXT_disjoint_timer_query_webgl2');
+      const ext1 = ext2 ? null : gl.getExtension('EXT_disjoint_timer_query');
+      if (ext2 && typeof gl.createQuery === 'function' && typeof gl.beginQuery === 'function') {
+        gpuTimer = { gl, ext: ext2, api: 'webgl2', pending: [], active: null };
+      } else if (ext1 && typeof ext1.createQueryEXT === 'function') {
+        gpuTimer = { gl, ext: ext1, api: 'webgl1', pending: [], active: null };
+      }
+      gpuTimingEvent(gpuTimer
+        ? { type: 'status', status: 'supported', api: gpuTimer.api }
+        : { type: 'status', status: 'unsupported', reason: 'EXT_disjoint_timer_query unavailable' });
+    } catch {
+      gpuTimingEvent({ type: 'status', status: 'unsupported', reason: 'timer-query initialization failed' });
+    }
+  }
+  function pollGpuQueries() {
+    if (!gpuTimer) return;
+    const { gl, ext, api, pending } = gpuTimer;
+    let disjoint = false;
+    try { disjoint = !!gl.getParameter(ext.GPU_DISJOINT_EXT); } catch { disjoint = true; }
+    if (disjoint) {
+      for (const item of pending.splice(0)) {
+        try { if (api === 'webgl2') gl.deleteQuery(item.query); else ext.deleteQueryEXT(item.query); } catch { /* ignore */ }
+      }
+      gpuTimingEvent({ type: 'disjoint' });
+      return;
+    }
+    for (let i = pending.length - 1; i >= 0; i--) {
+      const item = pending[i];
+      let available = false;
+      try {
+        available = api === 'webgl2'
+          ? gl.getQueryParameter(item.query, gl.QUERY_RESULT_AVAILABLE)
+          : ext.getQueryObjectEXT(item.query, ext.QUERY_RESULT_AVAILABLE_EXT);
+      } catch { /* retry on a later frame */ }
+      if (!available) continue;
+      pending.splice(i, 1);
+      try {
+        const ns = api === 'webgl2'
+          ? gl.getQueryParameter(item.query, gl.QUERY_RESULT)
+          : ext.getQueryObjectEXT(item.query, ext.QUERY_RESULT_EXT);
+        if (Number.isFinite(ns) && ns >= 0) gpuTimingEvent({ type: 'sample', gpuMs: ns / 1e6 });
+      } catch { /* ignore invalid query results */ }
+      try { if (api === 'webgl2') gl.deleteQuery(item.query); else ext.deleteQueryEXT(item.query); } catch { /* ignore */ }
+    }
+  }
+  function beginGpuQuery() {
+    if (!gpuTimer) return null;
+    pollGpuQueries();
+    if (gpuTimer.pending.length >= 8 || gpuTimer.active) {
+      gpuTimingEvent({ type: 'skipped' });
+      return null;
+    }
+    try {
+      const q = gpuTimer.api === 'webgl2' ? gpuTimer.gl.createQuery() : gpuTimer.ext.createQueryEXT();
+      if (!q) { gpuTimingEvent({ type: 'skipped' }); return null; }
+      if (gpuTimer.api === 'webgl2') gpuTimer.gl.beginQuery(gpuTimer.ext.TIME_ELAPSED_EXT, q);
+      else gpuTimer.ext.beginQueryEXT(gpuTimer.ext.TIME_ELAPSED_EXT, q);
+      gpuTimer.active = q;
+      return q;
+    } catch {
+      gpuTimingEvent({ type: 'status', status: 'error', reason: 'could not begin GPU query' });
+      gpuTimer = null;
+      return null;
+    }
+  }
+  function endGpuQuery(q) {
+    if (!gpuTimer || !q || gpuTimer.active !== q) return;
+    try {
+      if (gpuTimer.api === 'webgl2') gpuTimer.gl.endQuery(gpuTimer.ext.TIME_ELAPSED_EXT);
+      else gpuTimer.ext.endQueryEXT(gpuTimer.ext.TIME_ELAPSED_EXT);
+      gpuTimer.pending.push({ query: q });
+    } catch {
+      try { if (gpuTimer.api === 'webgl2') gpuTimer.gl.deleteQuery(q); else gpuTimer.ext.deleteQueryEXT(q); } catch { /* ignore */ }
+      gpuTimingEvent({ type: 'status', status: 'error', reason: 'could not end GPU query' });
+      gpuTimer = null;
+    } finally {
+      if (gpuTimer) gpuTimer.active = null;
+    }
+  }
   canvas.style.touchAction = 'none';
   container.appendChild(canvas);
 
@@ -551,7 +638,9 @@ export function createGfx(THREE, container, opts = {}) {
     }
     if (onSectionTiming) onSectionTiming('sceneUpdate', sceneStart, performance.now());
     const rendererStart = onSectionTiming ? performance.now() : 0;
-    renderer.render(scene, camera);
+    const gpuQuery = beginGpuQuery();
+    try { renderer.render(scene, camera); }
+    finally { endGpuQuery(gpuQuery); }
     if (onSectionTiming) onSectionTiming('rendererRender', rendererStart, performance.now());
     const postRenderStart = onSectionTiming ? performance.now() : 0;
     if (!envScheduled) { envScheduled = true; setTimeout(buildEnv, 60); }   // reflections are generated after the first frame is on screen
