@@ -131,6 +131,7 @@ export function createDiag(env) {
       inputToFrameMs: Object.assign(latStats(), { note: 'shot pointerup -> next animation-frame callback; excludes touch-panel sampling and display latency' }),
       frameCallbackMs: Object.assign(callbackStats(), { note: 'main-thread duration for the full game animation-frame callback; does not measure GPU execution or display presentation' }),
       sectionTiming: sectionStats(),
+      gpuTimerQuery: gpuTimingStats(),
       longTasks: {
         supported: longTaskSupported,
         observed: longTasks.length,
