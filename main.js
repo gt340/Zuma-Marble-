@@ -344,6 +344,7 @@ function bindMenus() {
 // ------------------------------------------------------------------ loop (exactly one)
 function frame(now) {
   rafId = requestAnimationFrame(frame);
+  if (diag) diag.frameStart();
   const rawMs = Math.max(0, now - lastT), dt = Math.min(0.1, rawMs / 1000); lastT = now;
   if (diag) diag.frame(now);
   if (innerWidth !== W || innerHeight !== H) { W = innerWidth; H = innerHeight; gfx.resize(W, H, hudSafe()); }
@@ -354,6 +355,7 @@ function frame(now) {
     if (game) { updateHud(dt); if (save.guide && game.state === 'playing') pred = game.predict(aim.dx, aim.dz); }
   }
   gfx.frame(game, game && game.paused ? 0 : dt, { dx: aim.dx, dz: aim.dz, guide: save.guide && !!pred, pred }, rawMs);
+  if (diag) diag.frameEnd(performance.now());
 }
 function startLoop() { if (rafId) return; lastT = performance.now(); rafId = requestAnimationFrame(frame); }
 
