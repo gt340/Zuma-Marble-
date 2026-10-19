@@ -17,6 +17,8 @@ export function createDiag(env) {
   const gpuQuerySamples = new Float32Array(300);
   let gpuQueryHead = 0, gpuQueryN = 0, gpuQueryStatus = 'pending', gpuQueryApi = null, gpuQueryDisjoint = 0, gpuQuerySkipped = 0, gpuQueryReason = null;
   const longTasks = []; let longTaskSupported = false;
+  // Startup timings are a separate bounded list; reset of steady-state frame stats does not erase boot evidence.
+  const startupPhases = [];
   const HIST_MAX = 250;                        // 1 ms bins up to 250 ms; larger intervals land in the last bin
   const hist = new Uint32Array(HIST_MAX + 1), ring = new Float32Array(300);
   let ringHead = 0, ringN = 0, last = 0, frames = 0, over33 = 0, over50 = 0, over100 = 0, maxMs = 0, sumMs = 0;
@@ -131,6 +133,7 @@ export function createDiag(env) {
       inputToFrameMs: Object.assign(latStats(), { note: 'shot pointerup -> next animation-frame callback; excludes touch-panel sampling and display latency' }),
       frameCallbackMs: Object.assign(callbackStats(), { note: 'main-thread duration for the full game animation-frame callback; does not measure GPU execution or display presentation' }),
       sectionTiming: sectionStats(),
+      startupTiming: { phases: startupPhases.slice(), note: 'boot-stage durations recorded by main.js; separate from steady-state frame timings' },
       gpuTimerQuery: gpuTimingStats(),
       longTasks: {
         supported: longTaskSupported,
@@ -177,6 +180,10 @@ export function createDiag(env) {
       `heap ${h === null ? 'n/a' : h + 'MB'}  input>frame ${L.n ? L.mean + 'ms (p95 ' + L.p95 + ')' : 'n/a'}\n` + `callback ${callbackStats().meanMs}ms (p95 ${callbackStats().p95Ms})  long tasks ${longTasks.length}${longTaskSupported ? '' : ' (n/a)'}\n` + `errors ${errors.filter((e) => e.level !== 'info').length}` + (flash ? '  · ' + flash : '');
   }
   setInterval(refresh, 500); setInterval(() => snapshot('auto'), 30000); snapshot('start'); refresh(); ev('diag', 'started');
+  function bootPhase(sample) {
+    if (!sample || typeof sample.name !== 'string' || !Number.isFinite(sample.durationMs) || sample.durationMs < 0) return;
+    cap(startupPhases, { name: sample.name.slice(0, 48), durationMs: +sample.durationMs.toFixed(2), sinceBootMs: Number.isFinite(sample.sinceBootMs) ? +sample.sinceBootMs.toFixed(2) : null }, 100);
+  }
   function section(name, start, end) {
     if (!Number.isFinite(start) || !Number.isFinite(end) || end < start) return;
     let b = sectionSamples[name];
@@ -221,5 +228,5 @@ export function createDiag(env) {
       note: 'GPU execution elapsed time from EXT_disjoint_timer_query; non-blocking results only. Not display/presentation latency. Disjoint results are discarded.'
     };
   }
-  return { frame, input, report, snapshot, reset, frameStart, frameEnd, section, gpuTiming: recordGpuTiming };
+  return { frame, input, report, snapshot, reset, frameStart, frameEnd, section, bootPhase, gpuTiming: recordGpuTiming };
 }
