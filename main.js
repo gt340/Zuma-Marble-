@@ -358,7 +358,11 @@ function frame(now) {
   if (diag) diag.frameStart();
   const rawMs = Math.max(0, now - lastT), dt = Math.min(0.1, rawMs / 1000); lastT = now;
   if (diag) diag.frame(now);
-  if (innerWidth !== W || innerHeight !== H) { W = innerWidth; H = innerHeight; gfx.resize(W, H, hudSafe()); }
+  if (innerWidth !== W || innerHeight !== H) {
+    const resizeStart = diag ? performance.now() : 0;
+    W = innerWidth; H = innerHeight; gfx.resize(W, H, hudSafe());
+    if (diag) diag.section('resize', resizeStart, performance.now());
+  }
   let pred = null;
   if (game) {
     let phaseStart = diag ? performance.now() : 0;
@@ -396,6 +400,7 @@ async function boot() {
   phaseStart = performance.now();
   try { THREE = await loadThree(); recordBootPhase('loadThreeResolve', phaseStart); }
   catch (e) {
+    recordBootPhase('loadThreeFailed', phaseStart);
     $('error-msg').textContent = 'The 3D engine (Three.js) could not be loaded. Serve this folder over http(s) and either run ./fetch-three.sh (offline copy) or connect to the internet. (' + (e && e.message ? e.message : e) + ')';
     showScreen('error'); return;
   }
