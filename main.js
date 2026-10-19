@@ -38,13 +38,21 @@ function gfxFlags() {
 // On-device diagnostics (?debug=1 only): the module is not even requested otherwise.
 let diag = null;
 const pendingGpuTiming = [];
+const bootStartedAt = performance.now();
+const pendingBootPhases = [];
+let firstFrameTimingRecorded = false;
+function recordBootPhase(name, start, end = performance.now()) {
+  const sample = { name, durationMs: Math.max(0, end - start), sinceBootMs: Math.max(0, end - bootStartedAt) };
+  if (diag && typeof diag.bootPhase === 'function') diag.bootPhase(sample);
+  else { pendingBootPhases.push(sample); if (pendingBootPhases.length > 100) pendingBootPhases.shift(); }
+}
 const DEBUG = (() => { try { return new URLSearchParams(location.search).get('debug') === '1'; } catch { return false; } })();
 // ?debug=1 lets a tester open every level in the grid for this page load only (the saved progress is never changed)
 const openTo = () => (DEBUG ? LEVEL_COUNT : save.unlocked);
 function maybeDiag() {
   try {
     if (new URLSearchParams(location.search).get('debug') !== '1') return;
-    import('./diag.js').then((m) => { diag = m.createDiag({ gfx: () => gfx, game: () => game, safeTop: () => { const h = hudSafe(); return h ? h.top : 0; }, version: 'main' }); for (const sample of pendingGpuTiming) diag.gpuTiming(sample); pendingGpuTiming.length = 0; })
+    import('./diag.js').then((m) => { diag = m.createDiag({ gfx: () => gfx, game: () => game, safeTop: () => { const h = hudSafe(); return h ? h.top : 0; }, version: 'main' }); for (const sample of pendingGpuTiming) diag.gpuTiming(sample); pendingGpuTiming.length = 0; for (const sample of pendingBootPhases) diag.bootPhase(sample); pendingBootPhases.length = 0; })
       .catch((e) => console.warn('[zuma] diagnostics failed to load', e && e.message));
   } catch { /* ignore */ }
 }
@@ -346,6 +354,7 @@ function bindMenus() {
 // ------------------------------------------------------------------ loop (exactly one)
 function frame(now) {
   rafId = requestAnimationFrame(frame);
+  if (!firstFrameTimingRecorded) { firstFrameTimingRecorded = true; recordBootPhase('firstAnimationFrameFromBoot', bootStartedAt, performance.now()); }
   if (diag) diag.frameStart();
   const rawMs = Math.max(0, now - lastT), dt = Math.min(0.1, rawMs / 1000); lastT = now;
   if (diag) diag.frame(now);
@@ -373,22 +382,33 @@ function startLoop() { if (rafId) return; lastT = performance.now(); rafId = req
 
 // ------------------------------------------------------------------ boot
 async function boot() {
+  let phaseStart = performance.now();
   maybeDiag();
+  recordBootPhase('requestDiagnostics', phaseStart);
+  phaseStart = performance.now();
   applySettings(); bindMenus();
+  recordBootPhase('initialUiSetup', phaseStart);
   // register the service worker BEFORE loading the engine, so the shell is cached even if the engine fails to load this time
+  phaseStart = performance.now();
   if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register('sw.js').catch(() => {});
+  recordBootPhase('serviceWorkerRegistrationRequest', phaseStart);
   let THREE;
-  try { THREE = await loadThree(); }
+  phaseStart = performance.now();
+  try { THREE = await loadThree(); recordBootPhase('loadThreeResolve', phaseStart); }
   catch (e) {
     $('error-msg').textContent = 'The 3D engine (Three.js) could not be loaded. Serve this folder over http(s) and either run ./fetch-three.sh (offline copy) or connect to the internet. (' + (e && e.message ? e.message : e) + ')';
     showScreen('error'); return;
   }
+  phaseStart = performance.now();
   try {
     gfx = createGfx(THREE, $('stage'), { ...gfxFlags(), onQuality: (q) => console.info('[zuma] quality ' + q.action, q), onSectionTiming: DEBUG ? (name, start, end) => { if (diag) diag.section(name, start, end); } : null, onGpuTiming: DEBUG ? (sample) => { if (diag) diag.gpuTiming(sample); else { pendingGpuTiming.push(sample); if (pendingGpuTiming.length > 32) pendingGpuTiming.shift(); } } : null });
+    recordBootPhase('createGfx', phaseStart);
   } catch (e) {
+    recordBootPhase('createGfxFailed', phaseStart);
     $('error-msg').textContent = 'WebGL could not start on this device/browser. (' + (e && e.message ? e.message : e) + ')';
     showScreen('error'); return;
   }
+  phaseStart = performance.now();
   gfx.setMarks(marksEnabled());
   // Android can reclaim GPU memory (e.g. while the app is in the background). Pause, say so, and recover when the browser restores the context.
   let lostFrom = null;
@@ -404,10 +424,16 @@ async function boot() {
     const back = lostFrom; lostFrom = null;
     showScreen(game && game.paused ? 'pause' : (back && back !== 'error' && back !== 'game' ? back : (game ? null : 'menu')));
   });
+  recordBootPhase('contextRecoveryHandlers', phaseStart);
+  phaseStart = performance.now();
   W = innerWidth; H = innerHeight; gfx.resize(W, H, hudSafe());
   const demo = new Game({ seed: 1, level: 1 }); gfx.setLevel(demo.path);       // backdrop for the menu
+  recordBootPhase('initialResizeAndMenuScene', phaseStart);
+  phaseStart = performance.now();
   bindInput(); refreshMenu(); buildPowerButtons(); showScreen('menu');
+  recordBootPhase('inputAndMenuReady', phaseStart);
   startLoop();
+  recordBootPhase('bootToLoopStart', bootStartedAt);
 }
 // Small hook for automated tests / debugging. Read-mostly; does not bypass the rules in core.js.
 window.__zuma = {
