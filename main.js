@@ -91,7 +91,13 @@ function refreshMenu() {
 }
 function buildLevelGrid() {
   const g = $('level-grid'); g.textContent = '';
+  const stages = ['Verdant Temple', 'Jade Passage', 'Ember Vault', 'Crystal Labyrinth', 'Eclipse Citadel', "Zuma's Heart"];
   for (let n = 1; n <= LEVEL_COUNT; n++) {
+    if ((n - 1) % 5 === 0) {
+      const label = document.createElement('div'); label.className = 'stage-label';
+      label.textContent = 'STAGE ' + (Math.floor((n - 1) / 5) + 1) + ' · ' + stages[Math.floor((n - 1) / 5)];
+      g.appendChild(label);
+    }
     const b = document.createElement('button'); b.className = 'lv' + (n > openTo() ? ' locked' : '');
     const st = save.stars[n] || 0;
     b.innerHTML = n + '<small>' + '★'.repeat(st) + '☆'.repeat(st ? 3 - st : 0) + '</small>';
