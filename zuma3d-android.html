@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="theme-color" content="#0b0918" />
-<meta name="description" content="3D Zuma — a 3D marble shooter: aim, match, chain reactions, power-ups, 10 levels and endless mode." />
+<meta name="description" content="3D Zuma — a 3D marble shooter with 30 campaign levels, 8 marble colours, chain reactions, power-ups and endless mode." />
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" type="image/png" href="icon-192.png" />
 <title>3D Zuma</title>
@@ -119,6 +119,7 @@ h2 { font-family: var(--serif); font-size: clamp(26px, 8vw, 40px); letter-spacin
 .scores { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; color: var(--dim); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
 .scores b { display: block; font-family: var(--serif); font-size: 20px; color: var(--gold); letter-spacing: .04em; }
 .levels { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; width: min(420px, 100%); }
+.stage-label { grid-column: 1 / -1; margin: 7px 0 -2px; text-align: left; color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 .lv { aspect-ratio: 1; border-radius: 16px; background: rgba(255, 255, 255, .07); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--serif); font-weight: 700; font-size: 22px; color: var(--ink); position: relative; }
 .lv small { font-size: 11px; color: var(--gold); letter-spacing: 1px; min-height: 13px; font-family: var(--sans); }
 .lv.locked { opacity: .4; } .lv.locked::after { content: "🔒"; position: absolute; font-size: 14px; right: 4px; top: 3px; }
@@ -180,13 +181,13 @@ input[type=range] { width: 140px; accent-color: var(--gold); }
     <button class="btn" id="btn-settings">Sound &amp; settings</button>
     <button class="btn small hidden" id="btn-install">Install app</button>
   </div>
-  <div class="scores"><span>Best campaign<b id="best-campaign">0</b></span><span>Best endless<b id="best-endless">0</b></span><span>Levels<b id="best-levels">0/10</b></span></div>
+  <div class="scores"><span>Best campaign<b id="best-campaign">0</b></span><span>Best endless<b id="best-endless">0</b></span><span>Levels<b id="best-levels">0/30</b></span></div>
 </section>
 
 <section class="screen hidden" id="screen-levels">
   <h2>Campaign</h2>
   <div class="levels" id="level-grid"></div>
-  <p class="sub" id="level-info">Clear every marble to finish a level. Stars are earned from your play score.</p>
+  <p class="sub" id="level-info">Clear every marble to finish a level. New colours and tougher tracks unlock as you progress; stars are earned from your play score.</p>
   <button class="btn small" data-back="menu">Back</button>
 </section>
 
@@ -198,6 +199,7 @@ input[type=range] { width: 140px; accent-color: var(--gold); }
     <li>When a match leaves a gap, the front part <b>stops</b>. If the colours at the gap match, it <b>rolls back</b> and chains a <b>combo</b>.</li>
     <li><b>Swap</b> the current and next marble (tap them, or Space). Think before you shoot: where you insert matters.</li>
     <li>Marbles with a symbol give you a <b>power-up</b> when destroyed: <b>Bomb</b> (blast radius), <b>Rainbow</b> (becomes the best colour), <b>Slow</b>, <b>Reverse</b>. Store up to 2 of each and arm them with the buttons (keys 1–4).</li>
+    <li><b>Campaign:</b> 30 levels across six stages. New marble colours unlock as you progress: cyan in level 11 and pink in level 16.</li>
     <li>If the chain reaches the <b>skull</b> you lose a life. Watch for the red warning!</li>
     <li>Keyboard: arrows aim, Enter shoots, Space swaps, P / Esc pauses.</li>
   </ul></div>
