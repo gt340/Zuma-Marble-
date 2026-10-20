@@ -41,7 +41,7 @@ test('glyph geometry stays inside the 64 px canvas with a margin (no clipped mar
   }
 });
 test('unknown colour indices (rainbow/bomb/-1) draw nothing but the save/restore frame; markURL is safe without a DOM', () => {
-  for (const ci of [-1, 6, 99]) assert.ok(!/fill\(|stroke\(|fillRect/.test(record(ci).sig));
+  for (const ci of [-1, 8, 99]) assert.ok(!/fill\(|stroke\(|fillRect/.test(record(ci).sig));
   assert.equal(markURL(0), '');          // no document in node: must degrade to '' (CSS then shows no glyph), never throw
 });
 test('the setting defaults to ON and is a plain boolean in the saved-progress schema', () => {
