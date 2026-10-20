@@ -113,7 +113,7 @@ export function getPath(name, a0Shift = 0) {
 }
 
 // ---------------------------------------------------------------- Levels
-export const LEVEL_COUNT = 10;
+export const LEVEL_COUNT = 30;
 const T = [
   // name, path, colors, total, speed, clump, powers, powerP, surge
   ['Awakening',     'spiral',   3, 30, 0.85, 0.35, ['bomb'],                         0.06, null],
@@ -126,6 +126,26 @@ const T = [
   ['Storm Coil',    'wobble',   6, 72, 1.38, 0.18, POWERS,                           0.07, { every: 15, dur: 3.0, mult: 1.8 }],
   ['Fuse of Doom',  'fuse',     6, 80, 1.42, 0.15, POWERS,                           0.07, { every: 14, dur: 3.5, mult: 1.8 }],
   ["Zuma's Heart",  'spiralCW', 6, 90, 1.46, 0.12, POWERS,                           0.07, { every: 13, dur: 3.5, mult: 1.9 }],
+  ['Crystal Crossing', 'square',   7, 94, 1.49, 0.115, POWERS, 0.07, { every: 12.5, dur: 3.5, mult: 1.9 }],
+  ['Moonlit Serpent',  'wobble',   7, 98, 1.52, 0.110, POWERS, 0.07, { every: 12.4, dur: 3.5, mult: 1.9 }],
+  ['Amber Labyrinth',  'fuse',     7, 102, 1.55, 0.105, POWERS, 0.07, { every: 12.3, dur: 3.6, mult: 1.9 }],
+  ['Twin Spiral',      'spiral',   7, 106, 1.58, 0.100, POWERS, 0.07, { every: 12.2, dur: 3.6, mult: 1.9 }],
+  ['Temple of Tides',  'spiralCW', 7, 110, 1.61, 0.095, POWERS, 0.07, { every: 12.1, dur: 3.7, mult: 1.9 }],
+  ['Eightfold Gate',   'square',   8, 114, 1.64, 0.090, POWERS, 0.07, { every: 12.0, dur: 3.7, mult: 1.9 }],
+  ['Cyan Eclipse',     'wobble',   8, 118, 1.67, 0.085, POWERS, 0.07, { every: 11.9, dur: 3.7, mult: 1.9 }],
+  ['Pink Thunder',     'fuse',     8, 122, 1.70, 0.080, POWERS, 0.07, { every: 11.8, dur: 3.7, mult: 1.9 }],
+  ["Dragon's Coil",    'spiralCW', 8, 126, 1.73, 0.075, POWERS, 0.07, { every: 11.7, dur: 3.7, mult: 1.9 }],
+  ['Golden Maze',      'square',   8, 130, 1.76, 0.070, POWERS, 0.07, { every: 11.6, dur: 3.7, mult: 1.9 }],
+  ['Obsidian Run',     'fuse',     8, 134, 1.78, 0.065, POWERS, 0.07, { every: 11.5, dur: 3.7, mult: 1.9 }],
+  ['Jade Tempest',     'wobble',   8, 138, 1.80, 0.060, POWERS, 0.07, { every: 11.4, dur: 3.8, mult: 1.9 }],
+  ['Royal Spiral',     'spiral',   8, 142, 1.82, 0.055, POWERS, 0.07, { every: 11.3, dur: 3.8, mult: 1.9 }],
+  ["Skull's Passage", 'square',   8, 146, 1.84, 0.050, POWERS, 0.07, { every: 11.2, dur: 3.8, mult: 1.9 }],
+  ['Twin Serpents',    'wobble',   8, 150, 1.86, 0.045, POWERS, 0.07, { every: 11.1, dur: 3.8, mult: 1.9 }],
+  ['Vault of Stars',   'spiralCW', 8, 154, 1.88, 0.040, POWERS, 0.07, { every: 11.0, dur: 3.8, mult: 1.9 }],
+  ['Furnace Maze',     'fuse',     8, 158, 1.90, 0.035, POWERS, 0.07, { every: 10.9, dur: 3.8, mult: 1.9 }],
+  ["Temple's Edge",   'square',   8, 162, 1.92, 0.030, POWERS, 0.07, { every: 10.8, dur: 3.8, mult: 1.9 }],
+  ['Last Guardian',    'wobble',   8, 166, 1.94, 0.025, POWERS, 0.07, { every: 10.7, dur: 3.8, mult: 1.9 }],
+  ['Zuma Eternal',     'spiralCW', 8, 170, 1.96, 0.020, POWERS, 0.07, { every: 10.6, dur: 3.8, mult: 1.9 }],
 ];
 export function levelConfig(n, mode = 'campaign') {
   let row, name, pathName, a0Shift = 0, level = n;
@@ -133,6 +153,8 @@ export function levelConfig(n, mode = 'campaign') {
     row = T[Math.min(Math.max(n, 1), LEVEL_COUNT) - 1];
     [name, pathName] = row;
     const [, , colors, total, speed, clump, powers, powerP, surge] = row;
+    // Later campaign stages rotate tested path families to add variety without changing collision geometry.
+    a0Shift = n > 10 ? ((n - 11) % 3) * 0.7 : 0;
     return finish({ name, pathName, a0Shift, colors, total, speed, clump, powers, powerP, surge });
   }
   const names = ['spiral', 'square', 'wobble', 'fuse', 'spiralCW'];

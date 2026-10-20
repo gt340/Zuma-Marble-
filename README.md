@@ -1,6 +1,6 @@
 # 3D Zuma — rebuilt
 
-A marble-shooter (Zuma-style) in Three.js: arc-length chain physics, authentic matching and cascades, 10 campaign levels + endless mode, power-ups, PWA shell.
+A marble-shooter (Zuma-style) in Three.js: arc-length chain physics, authentic matching and cascades, 30 campaign levels across six stages, 8 marble colours, endless mode, power-ups and a PWA shell.
 
 ## Run
 ```sh
@@ -12,7 +12,7 @@ Three.js r160 is committed in `vendor/` (MIT, see `THIRD-PARTY-NOTICES.md`) and 
 
 ## Test
 ```sh
-npm test                   # 63 headless tests: core rules (spec items 1-16), determinism, view framing, marble-mark drawing, adaptive-quality policy
+npm test                   # 65 headless tests: core rules (spec items 1-16), determinism, view framing, marble-mark drawing, adaptive-quality policy
 node tests/browser.mjs     # Playwright/Chromium UI test using a Three.js STUB (fast, not real rendering)
 REAL=1 node tests/browser.mjs   # same suite against the REAL vendor/three.module.js (software or hardware WebGL); uses the committed vendor copy
 node tests/balance.mjs 12  # simulated-player balance table (12 seeded runs per level and profile)
@@ -29,7 +29,7 @@ node audit/experiments.mjs audit/original/zuma3d-android.html   # reproduces the
 Without `REAL=1` the browser test replaces Three.js with `tests/fixtures/three-stub.js` (UI/input/loop only). With `REAL=1` it drives the real renderer; the offline checks in section 13 run only in that mode.
 
 ## Accessibility and adaptive quality (Phase 4)
-- **Marble symbols** (Settings → Marble symbols, default on; `?marks=0` for one visit): red +, green triangle, blue two bars, yellow ×, purple dot, orange ring, drawn as dark decals on the marble face and in the tray. Colours, collision, spacing and matching rules are unchanged; symbols are display-only.
+- **Marble symbols** (Settings → Marble symbols, default on; `?marks=0` for one visit): red +, green triangle, blue two bars, yellow ×, purple dot, orange ring, cyan diamond, pink star, drawn as dark decals on the marble face and in the tray. Colours, collision, spacing and matching rules are unchanged; symbols are display-only.
 - **Adaptive quality** (`quality.js`): steps down only after sustained overload, reverts steps that did not help (e.g. a 30 fps cap), recovers gradually after sustained headroom; `?dpr=` / `?halo=0` are ceilings, `?adapt=0` disables it. Limitation: a stable 30 Hz cap and a GPU that needs 25–33 ms per frame look the same from frame intervals alone, so the policy tests the effect of a step instead of guessing the cause. See PHASE4-REPORT.md.
 
 ## Controls

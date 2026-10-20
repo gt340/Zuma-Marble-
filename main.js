@@ -91,7 +91,13 @@ function refreshMenu() {
 }
 function buildLevelGrid() {
   const g = $('level-grid'); g.textContent = '';
+  const stages = ['Verdant Temple', 'Jade Passage', 'Ember Vault', 'Crystal Labyrinth', 'Eclipse Citadel', "Zuma's Heart"];
   for (let n = 1; n <= LEVEL_COUNT; n++) {
+    if ((n - 1) % 5 === 0) {
+      const label = document.createElement('div'); label.className = 'stage-label';
+      label.textContent = 'STAGE ' + (Math.floor((n - 1) / 5) + 1) + ' · ' + stages[Math.floor((n - 1) / 5)];
+      g.appendChild(label);
+    }
     const b = document.createElement('button'); b.className = 'lv' + (n > openTo() ? ' locked' : '');
     const st = save.stars[n] || 0;
     b.innerHTML = n + '<small>' + '★'.repeat(st) + '☆'.repeat(st ? 3 - st : 0) + '</small>';
@@ -232,8 +238,10 @@ function onEvent(ev) {
       sound.match(ev.n, ev.combo); haptic(ev.n >= 5 ? [20, 30, 30] : 14);
       let cx = 0, cz = 0; for (const b of ev.balls) { cx += b.x; cz += b.z; } cx /= ev.balls.length; cz /= ev.balls.length;
       pop('+' + fmt(ev.pts), cx, cz, COLOR_CSS[ev.color]);
-      if (ev.combo >= 2) comboText('COMBO x' + ev.combo + (ev.cascade ? ' · CHAIN' : ''));
-      else if (ev.n >= 6) comboText('AMAZING! ' + ev.n + ' MARBLES'); else if (ev.n >= 5) comboText('GREAT! ' + ev.n + ' MARBLES'); else if (ev.n >= 4) comboText(ev.n + ' MARBLES');
+      if (ev.n >= 5) comboText('5-MARBLE COMBO!' + (ev.combo >= 2 ? ' · x' + ev.combo : '') + (ev.cascade ? ' · CHAIN' : ''));
+      else if (ev.n === 4) comboText('4-MARBLE COMBO' + (ev.combo >= 2 ? ' · x' + ev.combo : '') + (ev.cascade ? ' · CHAIN' : ''));
+      else if (ev.n === 3) comboText('3-MARBLE COMBO' + (ev.combo >= 2 ? ' · x' + ev.combo : '') + (ev.cascade ? ' · CHAIN' : ''));
+      else if (ev.combo >= 2) comboText('COMBO x' + ev.combo + (ev.cascade ? ' · CHAIN' : ''));
       else if (ev.streak >= 3) comboText('STREAK x' + ev.streak);
       break;
     }

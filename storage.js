@@ -18,7 +18,11 @@ export function loadSave(storage) {
     const out = { ...d };
     for (const k of Object.keys(d)) if (typeof j[k] === typeof d[k] && j[k] !== null) out[k] = j[k];
     out.volume = Math.min(1, Math.max(0, out.volume));
-    out.unlocked = Math.min(10, Math.max(1, Math.floor(out.unlocked)));
+    const stars = out.stars && typeof out.stars === 'object' && !Array.isArray(out.stars) ? out.stars : {};
+    out.stars = stars;
+    const completed = Object.keys(stars).map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= 30 && Number(stars[n]) > 0);
+    // Migrate progress from the original 10-level campaign: a saved clear of level 10 unlocks the new level 11.
+    out.unlocked = Math.min(30, Math.max(1, Math.floor(out.unlocked), ...completed.map(n => n + 1)));
     return out;
   } catch { return d; }
 }

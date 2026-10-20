@@ -27,7 +27,7 @@ const MODES = {
   deutan: [[0.367322, 0.860646, -0.227968], [0.280085, 0.672501, 0.047413], [-0.011820, 0.042940, 0.968881]],
   tritan: [[1.255528, -0.076749, -0.178779], [-0.078411, 0.930809, 0.147602], [0.004733, 0.691367, 0.303900]],
 };
-const NAMES = ['red/plus', 'green/triangle', 'blue/bars', 'yellow/cross', 'purple/dot', 'orange/ring'];
+const NAMES = ['red/plus', 'green/triangle', 'blue/bars', 'yellow/cross', 'purple/dot', 'orange/ring', 'cyan/diamond', 'pink/star'];
 const VIEWS = process.env.ONLY ? process.env.ONLY.split(",").map(v => v.split("x").map(Number)) : [[360, 640], [390, 844], [412, 915], [640, 360], [844, 390], [915, 412]];
 const lines = [], out = { views: {} }, fails = [];
 const say = (s) => { console.log(s); lines.push(s); };
@@ -85,7 +85,7 @@ function loo(items, K) {            // leave-one-out nearest-template accuracy; 
 for (const [w, h] of VIEWS) {
   const ctx = await browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1, hasTouch: true, isMobile: true }); const page = await ctx.newPage();
   await page.goto(BASE + '/'); await page.waitForFunction(() => window.__zuma && window.__zuma.gfx, null, { timeout: 120000 });
-  await page.evaluate(() => window.__zuma.startCampaign(7)); await page.waitForFunction(() => window.__zuma.game.state === 'playing' && window.__zuma.gfx.envBuildMs > 0, null, { timeout: 120000 });
+  await page.evaluate(() => window.__zuma.startCampaign(16)); await page.waitForFunction(() => window.__zuma.game.state === 'playing' && window.__zuma.gfx.envBuildMs > 0, null, { timeout: 120000 });
   const r = await page.evaluate(`(${MEASURE})()`);
   const K = r.sel[0].K; const types = new Set(r.sel.map(m => m.color));
   say(`\n=== ${w}x${h}  marbles measured ${r.sel.length} (types ${[...types].sort().join(',')}), marble diameter ${r.sel[0].d.toFixed(1)} css px, crop ${K}x${K} px; draw calls on/off ${r.callsOn}/${r.callsOff}, triangles on/off ${r.trisOn}/${r.trisOff} ===`);

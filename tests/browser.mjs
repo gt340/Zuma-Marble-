@@ -463,7 +463,7 @@ try {
     // debug mode opens every level in the grid for testers but never changes the saved progress
     await page.evaluate(() => window.__zuma.menu());
     const unl = await page.evaluate(() => { document.getElementById('btn-campaign').click(); const lv = [...document.querySelectorAll('#level-grid .lv')]; return { n: lv.length, lockedCount: lv.filter(b => b.classList.contains('locked')).length, saved: window.__zuma.save.unlocked }; });
-    check('diagnostics: ?debug=1 shows all levels open in the grid while saved progress stays at level ' + unl.saved, unl.n === 10 && unl.lockedCount === 0 && unl.saved === 1, JSON.stringify(unl));
+    check('diagnostics: ?debug=1 shows all levels open in the grid while saved progress stays at level ' + unl.saved, unl.n === 30 && unl.lockedCount === 0 && unl.saved === 1, JSON.stringify(unl));
     check('diagnostics: only the injected errors appeared on the page', errors.every(e => /diag-test/.test(e)), errors.join('|'));
     await ctx.close();
   }

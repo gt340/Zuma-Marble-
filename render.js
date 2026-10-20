@@ -5,8 +5,8 @@ import { R, D, MUZZLE, FEED_S, BOMB_REACH } from './core.js';
 import { fitView, footprint, project, BALL_Y, PITCH } from './view.js';
 import { AdaptiveQuality } from './quality.js';
 
-export const COLOR_HEX = [0xe8243c, 0x2fd46a, 0x3a7bff, 0xffe03a, 0xc05bff, 0xff6a1a];   // yellow/orange re-spaced: rendered dE 23 -> 39 (tests/browser.mjs section 16)
-export const COLOR_CSS = ['#e8243c', '#2fd46a', '#3a7bff', '#ffe03a', '#c05bff', '#ff6a1a'];
+export const COLOR_HEX = [0xe8243c, 0x2fd46a, 0x3a7bff, 0xffe03a, 0xc05bff, 0xff6a1a, 0x00d8d8, 0xff62a8]; // red, green, blue, yellow, purple, orange, cyan, pink
+export const COLOR_CSS = ['#e8243c', '#2fd46a', '#3a7bff', '#ffe03a', '#c05bff', '#ff6a1a', '#00d8d8', '#ff62a8'];
 
 // ------------------------------------------------------------------ vector icons (canvas) — one source for 3D sprites and DOM buttons
 export function drawIcon(ctx, kind, s, fg = '#ffffff') {
@@ -34,9 +34,9 @@ export function drawIcon(ctx, kind, s, fg = '#ffffff') {
   ctx.restore();
 }
 // ------------------------------------------------------------------ marble marks: a non-colour identity cue (shape per marble type)
-// Index = colour index (COLOR_HEX order: red, green, blue, yellow, purple, orange). Shapes differ in topology/silhouette, not just size, so they
-// stay apart at ~8 px: plus, triangle, two bars, cross (x), dot, ring. Dark ink: readable on every marble hue and under red-green/blue-yellow confusion.
-export const MARK_NAMES = ['plus', 'triangle', 'bars', 'cross', 'dot', 'ring'];
+// Index = colour index (COLOR_HEX order: red, green, blue, yellow, purple, orange, cyan, pink). Shapes differ in topology/silhouette, not just size, so they
+// stay apart at ~8 px: plus, triangle, two bars, cross (x), dot, ring, diamond, star. Dark ink: readable on every marble hue and under common colour-vision deficiencies.
+export const MARK_NAMES = ['plus', 'triangle', 'bars', 'cross', 'dot', 'ring', 'diamond', 'star'];
 export function drawMark(ctx, ci, s) {
   const k = s / 64, ink = 'rgba(14,10,30,0.92)';
   ctx.save(); ctx.scale(k, k); ctx.fillStyle = ink; ctx.strokeStyle = ink; ctx.lineJoin = 'round';
@@ -47,6 +47,8 @@ export function drawMark(ctx, ci, s) {
     case 3: ctx.lineWidth = 12; ctx.lineCap = 'butt'; ctx.beginPath(); ctx.moveTo(14, 14); ctx.lineTo(50, 50); ctx.moveTo(50, 14); ctx.lineTo(14, 50); ctx.stroke(); break;   // X
     case 4: ctx.beginPath(); ctx.arc(32, 32, 11.5, 0, Math.PI * 2); ctx.fill(); break;                              // dot
     case 5: ctx.lineWidth = 11; ctx.beginPath(); ctx.arc(32, 32, 17, 0, Math.PI * 2); ctx.stroke(); break;        // ring
+    case 6: ctx.beginPath(); ctx.moveTo(32, 7); ctx.lineTo(57, 32); ctx.lineTo(32, 57); ctx.lineTo(7, 32); ctx.closePath(); ctx.fill(); break; // diamond
+    case 7: ctx.beginPath(); ctx.moveTo(32, 8); ctx.lineTo(38, 25); ctx.lineTo(56, 26); ctx.lineTo(42, 37); ctx.lineTo(46, 55); ctx.lineTo(32, 44); ctx.lineTo(18, 55); ctx.lineTo(22, 37); ctx.lineTo(8, 26); ctx.lineTo(26, 25); ctx.closePath(); ctx.fill(); break; // star
     default: break;
   }
   ctx.restore();
