@@ -12,7 +12,7 @@ Three.js r160 is committed in `vendor/` (MIT, see `THIRD-PARTY-NOTICES.md`) and 
 
 ## Test
 ```sh
-npm test                   # 63 headless tests: core rules (spec items 1-16), determinism, view framing, marble-mark drawing, adaptive-quality policy
+npm test                   # 64 headless tests: core rules (spec items 1-16), determinism, view framing, marble-mark drawing, adaptive-quality policy
 node tests/browser.mjs     # Playwright/Chromium UI test using a Three.js STUB (fast, not real rendering)
 REAL=1 node tests/browser.mjs   # same suite against the REAL vendor/three.module.js (software or hardware WebGL); uses the committed vendor copy
 node tests/balance.mjs 12  # simulated-player balance table (12 seeded runs per level and profile)
