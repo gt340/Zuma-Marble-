@@ -238,8 +238,10 @@ function onEvent(ev) {
       sound.match(ev.n, ev.combo); haptic(ev.n >= 5 ? [20, 30, 30] : 14);
       let cx = 0, cz = 0; for (const b of ev.balls) { cx += b.x; cz += b.z; } cx /= ev.balls.length; cz /= ev.balls.length;
       pop('+' + fmt(ev.pts), cx, cz, COLOR_CSS[ev.color]);
-      if (ev.combo >= 2) comboText('COMBO x' + ev.combo + (ev.cascade ? ' · CHAIN' : ''));
-      else if (ev.n >= 6) comboText('AMAZING! ' + ev.n + ' MARBLES'); else if (ev.n >= 5) comboText('GREAT! ' + ev.n + ' MARBLES'); else if (ev.n >= 4) comboText(ev.n + ' MARBLES');
+      if (ev.n >= 5) comboText('5-MARBLE COMBO!' + (ev.combo >= 2 ? ' · x' + ev.combo : '') + (ev.cascade ? ' · CHAIN' : ''));
+      else if (ev.n === 4) comboText('4-MARBLE COMBO' + (ev.combo >= 2 ? ' · x' + ev.combo : '') + (ev.cascade ? ' · CHAIN' : ''));
+      else if (ev.n === 3) comboText('3-MARBLE COMBO' + (ev.combo >= 2 ? ' · x' + ev.combo : '') + (ev.cascade ? ' · CHAIN' : ''));
+      else if (ev.combo >= 2) comboText('COMBO x' + ev.combo + (ev.cascade ? ' · CHAIN' : ''));
       else if (ev.streak >= 3) comboText('STREAK x' + ev.streak);
       break;
     }
