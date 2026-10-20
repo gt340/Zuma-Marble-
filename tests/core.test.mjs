@@ -67,24 +67,35 @@ test('paths: no self-crossing, clear of the frog, long enough for every level', 
 });
 
 // ---------- levels ----------
-test('levels: 10 campaign levels, strictly escalating, valid', () => {
-  assert.equal(LEVEL_COUNT, 10);
+test('levels: 30 campaign levels, strictly escalating, valid', () => {
+  assert.equal(LEVEL_COUNT, 30);
   let prev = null;
-  for (let n = 1; n <= 10; n++) {
+  for (let n = 1; n <= LEVEL_COUNT; n++) {
     const c = levelConfig(n);
-    assert.ok(c.colors >= 3 && c.colors <= 6); assert.ok(PATH_DEFS[c.pathName]);
+    assert.ok(c.colors >= 3 && c.colors <= 8); assert.ok(PATH_DEFS[c.pathName]);
     assert.ok(c.stars[0] < c.stars[1] && c.stars[1] < c.stars[2]);
     if (prev) { assert.ok(c.speed > prev.speed && c.total >= prev.total && c.colors >= prev.colors && c.clump <= prev.clump); }
     prev = c;
   }
-  const names = new Set(Array.from({ length: 10 }, (_, i) => levelConfig(i + 1).name));
-  assert.equal(names.size, 10);
+  const names = new Set(Array.from({ length: LEVEL_COUNT }, (_, i) => levelConfig(i + 1).name));
+  assert.equal(names.size, LEVEL_COUNT);
+  assert.equal(levelConfig(10).colors, 6);
+  for (let n = 11; n <= 15; n++) assert.equal(levelConfig(n).colors, 7, `level ${n} unlocks cyan`);
+  for (let n = 16; n <= 30; n++) assert.equal(levelConfig(n).colors, 8, `level ${n} unlocks pink`);
+  assert.ok(levelConfig(30).total < 180, 'late-level chain stays within the renderer instance capacity');
+  assert.deepEqual([levelConfig(11).a0Shift, levelConfig(12).a0Shift, levelConfig(13).a0Shift], [0, 0.7, 1.4]);
   const e1 = levelConfig(1, 'endless'), e30 = levelConfig(30, 'endless');
   assert.ok(e30.speed > e1.speed && e30.speed <= 2.7 && e30.colors === 6);
 });
 
+test('storage migration unlocks level 11 for players who already cleared level 10', async () => {
+  const { loadSave } = await import('../storage.js');
+  const fake = { getItem: () => JSON.stringify({ unlocked: 10, stars: { '1': 2, '10': 1 } }) };
+  assert.equal(loadSave(fake).unlocked, 11);
+});
+
 test('spawn generator never produces a run of three and respects the level colour count', () => {
-  for (let lvl = 1; lvl <= 10; lvl++) {
+  for (let lvl = 1; lvl <= LEVEL_COUNT; lvl++) {
     const g = new Game({ seed: lvl, level: lvl }); g.state = 'playing';
     const seq = []; let guard = 0;
     while ((g.queue > 0 || g.chain.length) && guard++ < 200000) { g.step(STEP); if (g.chain.length && g.chain[0].s < 0.3) { /* tail */ } if (g.chain.length && g.chain[g.chain.length - 1].s > g.path.L - 5) break; }
@@ -473,8 +484,8 @@ test('predict(lead) equals static prediction when the chain is stationary', () =
 
 // ---- regression: DOM colour table must match the 3D colour table (tray/HUD vs marbles)
 import { COLOR_HEX, COLOR_CSS } from '../render.js';
-test('COLOR_CSS and COLOR_HEX describe the same six colours', () => {
-  assert.equal(COLOR_HEX.length, 6); assert.equal(COLOR_CSS.length, 6);
+test('COLOR_CSS and COLOR_HEX describe the same eight colours', () => {
+  assert.equal(COLOR_HEX.length, 8); assert.equal(COLOR_CSS.length, 8);
   COLOR_HEX.forEach((h, i) => assert.equal(COLOR_CSS[i], '#' + h.toString(16).padStart(6, '0'), 'colour ' + i));
 });
 
