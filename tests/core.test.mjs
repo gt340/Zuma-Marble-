@@ -489,6 +489,15 @@ test('COLOR_CSS and COLOR_HEX describe the same eight colours', () => {
   COLOR_HEX.forEach((h, i) => assert.equal(COLOR_CSS[i], '#' + h.toString(16).padStart(6, '0'), 'colour ' + i));
 });
 
+test('late campaign shooter can select all eight marble colours', () => {
+  const seen = new Set();
+  for (let seed = 1; seed <= 200; seed++) {
+    const g = new Game({ seed, level: 16 });
+    seen.add(g.cur.color); seen.add(g.next.color);
+  }
+  assert.deepEqual([...seen].sort((a, b) => a - b), [0, 1, 2, 3, 4, 5, 6, 7]);
+});
+
 // ---- regression: late-level tuning keeps meaningful challenge (speed band, growth in size/colours, surge present) while staying tunable
 test('campaign tuning guard: level 10 stays much harder than level 1; levels 8-10 speed stays in the tuned band', () => {
   const L = Array.from({ length: LEVEL_COUNT }, (_, i) => levelConfig(i + 1, 'campaign'));
