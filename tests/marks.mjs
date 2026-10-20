@@ -85,7 +85,7 @@ function loo(items, K) {            // leave-one-out nearest-template accuracy; 
 for (const [w, h] of VIEWS) {
   const ctx = await browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1, hasTouch: true, isMobile: true }); const page = await ctx.newPage();
   await page.goto(BASE + '/'); await page.waitForFunction(() => window.__zuma && window.__zuma.gfx, null, { timeout: 120000 });
-  await page.evaluate(() => window.__zuma.startCampaign(7)); await page.waitForFunction(() => window.__zuma.game.state === 'playing' && window.__zuma.gfx.envBuildMs > 0, null, { timeout: 120000 });
+  await page.evaluate(() => window.__zuma.startCampaign(16)); await page.waitForFunction(() => window.__zuma.game.state === 'playing' && window.__zuma.gfx.envBuildMs > 0, null, { timeout: 120000 });
   const r = await page.evaluate(`(${MEASURE})()`);
   const K = r.sel[0].K; const types = new Set(r.sel.map(m => m.color));
   say(`\n=== ${w}x${h}  marbles measured ${r.sel.length} (types ${[...types].sort().join(',')}), marble diameter ${r.sel[0].d.toFixed(1)} css px, crop ${K}x${K} px; draw calls on/off ${r.callsOn}/${r.callsOff}, triangles on/off ${r.trisOn}/${r.trisOff} ===`);
